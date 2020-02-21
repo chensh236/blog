@@ -6,7 +6,7 @@ header,
   overflow-wrap: break-word;
 }
 body {
-  background-color: #eee;
+  background-color: #f4f7f7;
   color: #3c4858;
 }
 body a {
@@ -69,25 +69,25 @@ body a:hover {
 .navbar {
   background-color: transparent;
   font-size: 0.875rem;
-  color: #3c4858;
+  color: white;
 }
 .navbar a {
-  color: #3c4858;
+  color: white;
 }
 .navbar a:hover {
   background-color: rgba(0,0,0,0.1);
 }
 .navbar-custom {
-  color: #3c4858;
+  color: white;
 }
 .navbar-custom a {
-  color: #3c4858;
+  color: white;
 }
 .top-nav-collapse {
-  background-color: #2f4154;
+  background-color: #343838;
 }
 .navbar-col-show {
-  background-color: #2f4154;
+  background-color: #343838;
 }
 @media (max-width: 768px) {
   .navbar {

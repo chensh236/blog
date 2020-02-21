@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 
 
@@ -7,16 +7,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ava.png">
+  <link rel="icon" type="image/png" href="/img/ava.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="description" content="">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>hexo建站过程(初级) ~ Hexo</title>
+  <title>hexo建站过程(初级) ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -43,7 +43,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Hexo</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>chensh236's blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -60,7 +60,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/">首页</a>
           </li>
         
           
@@ -68,7 +68,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/archives/">Archives</a>
+            <a class="nav-link" href="/archives/">归档</a>
           </li>
         
           
@@ -76,7 +76,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/categories/">Categories</a>
+            <a class="nav-link" href="/categories/">分类</a>
           </li>
         
           
@@ -84,7 +84,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/tags/">Tags</a>
+            <a class="nav-link" href="/tags/">标签</a>
           </li>
         
           
@@ -92,7 +92,7 @@
           
           
           <li class="nav-item">
-            <a class="nav-link" href="/about/">About</a>
+            <a class="nav-link" href="/about/">关于</a>
           </li>
         
         
@@ -121,7 +121,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  Friday, February 21st 2020, 10:47 pm
+                  星期五, 二月 21日 2020, 10:47 晚上
                 </p>
               
 
@@ -134,12 +134,6 @@
                   </span>&nbsp;
                 
 
-                
-                  
-                  &nbsp;<i class="far fa-clock"></i>
-                  <span class="post-count">
-                      6 分钟
-                  </span>&nbsp;
                 
 
                 
@@ -175,7 +169,8 @@
 <p>hexo框架相关文档如上，相关介绍也都在上面，这里不再赘述。我主要阐述我自己部署hexo的过程，以供参考。由于懒得每次写作都需要进行一次部署，所以想要将hexo搭建在腾讯云服务器上，并且部署在本地的服务器以及github上。</p>
 <pre><code>运行环境：
 本地: Mac OS / Window 10
-cvm: ubuntu</code></pre><h3 id="公钥免密登陆"><a href="#公钥免密登陆" class="headerlink" title="公钥免密登陆"></a>公钥免密登陆</h3><p>本地电脑生成公钥和私钥，将公钥上传到cvm上，本地使用私钥，可以实现免密登陆ssh。关于ssh使用的基于非对称加密算法的<code>rsa</code>算法，可以查看<a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank" rel="noopener">wiki百科</a>的介绍。</p>
+cvm: ubuntu
+</code></pre><h3 id="公钥免密登陆"><a href="#公钥免密登陆" class="headerlink" title="公钥免密登陆"></a>公钥免密登陆</h3><p>本地电脑生成公钥和私钥，将公钥上传到cvm上，本地使用私钥，可以实现免密登陆ssh。关于ssh使用的基于非对称加密算法的<code>rsa</code>算法，可以查看<a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem" target="_blank" rel="noopener">wiki百科</a>)的介绍。</p>
 <h4 id="本地电脑配置"><a href="#本地电脑配置" class="headerlink" title="本地电脑配置"></a>本地电脑配置</h4><p>使用命令：<code>ssh-keygen -t rsa</code>，一路回车即可生成一对公钥和私钥。公钥默认名为<code>id_rsa.pub</code>，私钥为<code>id_rsa</code>。存储位置如下：</p>
 <ul>
 <li>Windows：<code>C:\Users\*用户名*\.ssh\</code></li>
@@ -186,16 +181,19 @@ cvm: ubuntu</code></pre><h3 id="公钥免密登陆"><a href="#公钥免密登陆
 <li>确保连接成功，需要更改文件权限：</li>
 </ul>
 <pre><code>chmod 600 authorized_keys # 在~/.ssh/目录中执行
-chmod 700 ~/.ssh # 在~/目录中执行</code></pre><ul>
+chmod 700 ~/.ssh # 在~/目录中执行
+</code></pre><ul>
 <li>写入公钥：</li>
 </ul>
-<pre><code>cat *公钥路径*/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code></pre><ul>
+<pre><code>cat *公钥路径*/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+</code></pre><ul>
 <li>更改服务器配置，确保能够通过密钥登陆：</li>
 </ul>
 <p>修改配置文件：<code>sudo vim /etc/ssh/sshd_config</code>，添加（修改）如下参数：</p>
 <pre><code>RSAAuthentication yes
 PubkeyAuthentication yes
-PermitRootLogin yes</code></pre><ul>
+PermitRootLogin yes
+</code></pre><ul>
 <li><p>可选择禁用密码登录：<code>PasswordAuthentication no</code></p>
 </li>
 <li><p>重启ssh服务：<code>service sshd restart</code></p>
@@ -206,28 +204,34 @@ PermitRootLogin yes</code></pre><ul>
 <h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>在ubuntu下，输入命令<code>sudo apt-get install git-core</code>。</p>
 <p>之后需要设置用户名以及邮箱。这里使用全局设置。</p>
 <pre><code>git config --global user.name &quot;*用户名*&quot;
-git config --global user.email &quot;*邮箱*&quot;</code></pre><h4 id="安装node-js以及hexo"><a href="#安装node-js以及hexo" class="headerlink" title="安装node.js以及hexo"></a>安装node.js以及hexo</h4><ul>
+git config --global user.email &quot;*邮箱*&quot;
+</code></pre><h4 id="安装node-js以及hexo"><a href="#安装node-js以及hexo" class="headerlink" title="安装node.js以及hexo"></a>安装node.js以及hexo</h4><ul>
 <li>在ubuntu下安装node.js：</li>
 </ul>
 <pre><code>curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-sudo apt-get install -y nodejs</code></pre><ul>
+sudo apt-get install -y nodejs
+</code></pre><ul>
 <li>安装hexo：<code>npm install -g hexo-cli</code></li>
 <li>如果出现<strong>EACCES</strong>错误，修改配置文件即可。<a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally" target="_blank" rel="noopener">参考连接</a><pre><code>mkdir ~/.npm-global
 npm config set prefix &#39;~/.npm-global&#39;
 export PATH=~/.npm-global/bin:$PATH
 source ~/.profile
 #　测试
-sudo npm install -g jshint</code></pre>如果<code>npm</code>无法正常下载包，可以使用淘宝的源，输入命令：</li>
+sudo npm install -g jshint
+</code></pre>如果<code>npm</code>无法正常下载包，可以使用淘宝的源，输入命令：</li>
 </ul>
-<pre><code>npm install -g *cnpm*--registry=https://registry.npm.taobao.org</code></pre><p>之后使用<code>cnpm</code>代替<code>npm</code>即可。</p>
+<pre><code>npm install -g *cnpm*--registry=https://registry.npm.taobao.org
+</code></pre><p>之后使用<code>cnpm</code>代替<code>npm</code>即可。</p>
 <ul>
 <li>安装建站需要的其他包：</li>
 </ul>
 <pre><code>npm install -g hexo-server
 npm install -g hexo-deployer-git
-npm install -g hexo-util</code></pre><h4 id="创建本地博客文件夹"><a href="#创建本地博客文件夹" class="headerlink" title="创建本地博客文件夹"></a>创建本地博客文件夹</h4><p>因为我在cvm使用了第二块数据盘，需要<code>sudo</code>权限才能够进行更改。故新建<code>blog</code>文件夹之后修改文件夹权限。</p>
+npm install -g hexo-util
+</code></pre><h4 id="创建本地博客文件夹"><a href="#创建本地博客文件夹" class="headerlink" title="创建本地博客文件夹"></a>创建本地博客文件夹</h4><p>因为我在cvm使用了第二块数据盘，需要<code>sudo</code>权限才能够进行更改。故新建<code>blog</code>文件夹之后修改文件夹权限。</p>
 <pre><code>sudo chown -R $USER:$USER blog
-sudo chmod -R 755 blog</code></pre><p>进入文件夹，初始化hexo：<code>hexo init .</code> 如果没有将hexo所在路径添加到环境变量中，需要使用<code>npx hexo init .</code></p>
+sudo chmod -R 755 blog
+</code></pre><p>进入文件夹，初始化hexo：<code>hexo init .</code> 如果没有将hexo所在路径添加到环境变量中，需要使用<code>npx hexo init .</code></p>
 <p>之后输入<code>hexo s</code>可以启动项目，在本地<code>localhost:4000</code>可以查看。</p>
 <h4 id="将hexo部署到github上"><a href="#将hexo部署到github上" class="headerlink" title="将hexo部署到github上"></a>将hexo部署到github上</h4><p>在github上添加一个<code>repository</code>，名字<strong>必须</strong>是<code>*github用户名*.github.io</code>，否则会出现错误。复制远程git地址。</p>
 <p>在博客所在文件夹中，编辑<code>_config.yml</code>，在文本最后的部署部分更改为：</p>
@@ -235,24 +239,30 @@ sudo chmod -R 755 blog</code></pre><p>进入文件夹，初始化hexo：<code>he
     type: git
     repo:
         github: *远程git地址*
-    branch: master</code></pre><p>保存后执行<code>hexo g -d</code>可以生成并部署，或者<code>hexo generate</code>之后<code>hexo deploy</code>亦可。</p>
+    branch: master
+</code></pre><p>保存后执行<code>hexo g -d</code>可以生成并部署，或者<code>hexo generate</code>之后<code>hexo deploy</code>亦可。</p>
 <p>在部署过程中，需要输入用户名以及密码。如果以后懒得输入，可以使用如下命令，下次输入后不用再输入：</p>
-<pre><code>git config --global credential.helper store</code></pre><h4 id="将hexo部署到本地"><a href="#将hexo部署到本地" class="headerlink" title="将hexo部署到本地"></a>将hexo部署到本地</h4><p>这里使用git将hexo部署到本地。首先需要创建文件夹，如果出现权限问题，可以参照前面的方法设置文件夹的权限。之后进入文件夹，创建裸仓：</p>
+<pre><code>git config --global credential.helper store
+</code></pre><h4 id="将hexo部署到本地"><a href="#将hexo部署到本地" class="headerlink" title="将hexo部署到本地"></a>将hexo部署到本地</h4><p>这里使用git将hexo部署到本地。首先需要创建文件夹，如果出现权限问题，可以参照前面的方法设置文件夹的权限。之后进入文件夹，创建裸仓：</p>
 <pre><code>git init --bare hexo.git
-chown -R $User:$User hexo.git</code></pre><p>进入<code>hexo.git</code>文件夹，找到<code>hooks</code>目录并进入，通过如下命令将<code>post-update.sample</code>文件改名为<code>post-update.sample</code>：</p>
-<pre><code>mv post-update.sample post-update</code></pre><p>之后编辑该文件，在顶部加入：</p>
-<pre><code>git --work-tree=*文件夹路径* --git-dir=*文件夹路径*/hexo.git checkout -f</code></pre><p>修改该文件权限：</p>
-<pre><code>chmod +x post-update</code></pre><p>在博客文件夹中，修改<code>_config.yml</code>，将<code>deploy</code>部分改为：</p>
+chown -R $User:$User hexo.git
+</code></pre><p>进入<code>hexo.git</code>文件夹，找到<code>hooks</code>目录并进入，通过如下命令将<code>post-update.sample</code>文件改名为<code>post-update.sample</code>：</p>
+<pre><code>mv post-update.sample post-update
+</code></pre><p>之后编辑该文件，在顶部加入：</p>
+<pre><code>git --work-tree=*文件夹路径* --git-dir=*文件夹路径*/hexo.git checkout -f
+</code></pre><p>修改该文件权限：</p>
+<pre><code>chmod +x post-update
+</code></pre><p>在博客文件夹中，修改<code>_config.yml</code>，将<code>deploy</code>部分改为：</p>
 <pre><code>deploy:
     type: git
     repo:
         github: *远程git地址*
         repo: *文件夹路径*/hexo.git
-    branch: master        </code></pre><h5 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h5><p>nginx的<a href="https://blog.csdn.net/weixin_42167759/article/details/85049546" target="_blank" rel="noopener">配置文件解析</a></p>
+    branch: master
+</code></pre><h5 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h5><p>nginx的<a href="https://blog.csdn.net/weixin_42167759/article/details/85049546" target="_blank" rel="noopener">配置文件解析</a></p>
 <p>由于使用了https，所以nginx需要监听80端口，将http链接跳转为https链接。通过nginx配置https链接可以参考<a href="https://juejin.im/post/5c0144036fb9a04a102f046a" target="_blank" rel="noopener">nginx配置ssl实现https访问</a>，非常简单所以不再赘述。与基础配置不同的是需要添加<code>root</code>指向前面提到的hexo部署到本地的文件夹（下面有提示） ，并且添加<code>include mime.types;</code>确保<code>css</code>文件能够被浏览器正常识别。</p>
 <ul>
-<li><p>安装：<code>apt-get install nginx</code></p>
-</li>
+<li>安装：<code>apt-get install nginx</code></li>
 <li><p>查看位置/检查配置：<code>nginx -t</code></p>
 </li>
 <li><p>更改配置</p>
@@ -305,19 +315,22 @@ include mime.types;
   server_name *域名*;
   return 301 https://blog.chensh236.com$request_uri;
  }
-}</code></pre><ul>
+}
+</code></pre><ul>
 <li>执行<code>nginx -t</code>与<code>nginx -s reload</code>（可能需要sudo）</li>
 </ul>
 <p>如若出现：</p>
-<pre><code>nginx: [warn] the &quot;user&quot; directive makes sense only if the master process runs with super-user privileges, ignored in /usr/local/nginx/conf/nginx.conf:2</code></pre><p>需要解决权限占用问题：</p>
+<pre><code>nginx: [warn] the &quot;user&quot; directive makes sense only if the master process runs with super-user privileges, ignored in /usr/local/nginx/conf/nginx.conf:2
+</code></pre><p>需要解决权限占用问题：</p>
 <pre><code>chown root.root nginx
 chmod 755 nginx
-chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="headerlink" title="重装nginx"></a>重装nginx</h5><p>如果nginx出现问题需要重装，其配置文件依旧存在，可以通过如下方法完全清除nginx相关的依赖、配置文件。</p>
+chmod u+s nginx
+</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="headerlink" title="重装nginx"></a>重装nginx</h5><p>如果nginx出现问题需要重装，其配置文件依旧存在，可以通过如下方法完全清除nginx相关的依赖、配置文件。</p>
 <ul>
 <li>卸载nginx不保留配置文件：<code>sudo apt-get --purge remove nginx</code></li>
 <li>卸载不需要的依赖包：<code>sudo apt-get autoremove</code></li>
 <li>筛选已经安装包中与nginx有关的：<code>dpkg --get-selections | grep nginx</code></li>
-<li>卸载所有有关的``sudo apt-get –purge remove <em>和nginx相关的安装包</em>`</li>
+<li>卸载所有有关的：<code>sudo apt-get --purge remove *和nginx相关的安装包*</code></li>
 </ul>
 
             <hr>
@@ -326,6 +339,25 @@ chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="h
           <div>
             <p>
             
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C">网络</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA">网站搭建</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%AE%A2">博客</a>
+                
+                  <a class="hover-with-bg" href="/tags/hexo">hexo</a>
+                
+              </span>
             
             </p>
             
@@ -338,7 +370,7 @@ chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="h
     <div class="d-none d-lg-block col-lg-2 toc-container">
       
   <div id="toc">
-    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;TOC</p>
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
     <div id="tocbot"></div>
   </div>
 
@@ -371,7 +403,7 @@ chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="h
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -380,7 +412,7 @@ chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="h
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
           <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -397,23 +429,14 @@ chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="h
     <br>
 
     
-  
-    <!-- 不蒜子统计PV -->
-    
-    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
-          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
-  
-  
-    <!-- 不蒜子统计UV -->
-    
-    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
-            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
-  
-  <br>
-
 
 
     
+  <!-- 备案信息 -->
+  <a href="http://beian.miit.gov.cn/" target="_blank"
+     rel="nofollow noopener">粤ICP备18156231号-1</a>
+  
+
 
 
     <!-- cnzz Analytics icon -->
@@ -481,7 +504,7 @@ chmod u+s nginx</code></pre><h5 id="重装nginx"><a href="#重装nginx" class="h
         '  ',
         "hexo建站过程(初级)&nbsp;",
       ],
-      cursorChar: "_",
+      cursorChar: "|",
       typeSpeed: 70,
       loop: false,
     });
