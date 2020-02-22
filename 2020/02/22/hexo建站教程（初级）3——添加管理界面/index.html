@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>hexo建站教程（初级）3——添加管理界面 ~ chensh236&#39;s blog</title>
+  <title>hexo建站教程（初级）3——添加管理界面与评论 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -130,7 +130,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    219 字
+                    243 字
                   </span>&nbsp;
                 
 
@@ -165,7 +165,7 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="添加admin-hexo界面"><a href="#添加admin-hexo界面" class="headerlink" title="添加admin-hexo界面"></a>添加admin-hexo界面</h1><p><a href="https://albenw.github.io/posts/4ffa5bc6/" target="_blank" rel="noopener">参考文档1</a> <a href="https://blog.csdn.net/RenZouChaLiangrz/article/details/87890621" target="_blank" rel="noopener">参考文档2</a></p>
+            <h1 id="添加admin-hexo界面"><a href="#添加admin-hexo界面" class="headerlink" title="添加admin-hexo界面"></a>添加admin-hexo界面</h1><p><a href="https://jaredforsyth.com/hexo-admin/" target="_blank" rel="noopener">官网</a> <a href="https://albenw.github.io/posts/4ffa5bc6/" target="_blank" rel="noopener">参考文档1</a> <a href="https://blog.csdn.net/RenZouChaLiangrz/article/details/87890621" target="_blank" rel="noopener">参考文档2</a></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在安装admin-hexo之前需要安装一些依赖，避免错误发生。键入命令：</p>
 <pre><code>npm install minimatch@&quot;3.0.2&quot;  
 npm update -d
@@ -177,7 +177,8 @@ npm update -d
   password_hash: ...
   secret: ...
   deployCommand: ./*新建的文件夹名*/d.sh
-</code></pre>
+</code></pre><h2 id="添加评论"><a href="#添加评论" class="headerlink" title="添加评论"></a>添加评论</h2><p>这部分比较简单，我是用的是valine。<a href="https://www.jianshu.com/p/728a9594bb6c" target="_blank" rel="noopener">参考文档</a></p>
+
             <hr>
           </div>
           <br>
@@ -229,6 +230,37 @@ npm update -d
 <!-- Comments -->
 <div class="col-lg-7 mx-auto nopadding-md">
   <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'false' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "f98BWrNijceI1epEOr29TKLO-gzGzoHsz",
+        app_key: "lxfaw08LA0SzHt6cgaUvqm0R",
+        placeholder: "说点什么",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
     
   </div>
 </div>
@@ -361,7 +393,7 @@ npm update -d
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "hexo建站教程（初级）3——添加管理界面&nbsp;",
+        "hexo建站教程（初级）3——添加管理界面与评论&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,

@@ -165,8 +165,7 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h1 id="hexo-建站过程"><a href="#hexo-建站过程" class="headerlink" title="hexo 建站过程"></a>hexo 建站过程</h1><h2 id="初级：搭建hexo并部署本地服务器以及github"><a href="#初级：搭建hexo并部署本地服务器以及github" class="headerlink" title="初级：搭建hexo并部署本地服务器以及github"></a>初级：搭建hexo并部署本地服务器以及github</h2><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo文档</a></p>
-<p>hexo框架相关文档如上，相关介绍也都在上面，这里不再赘述。我主要阐述我自己部署hexo的过程，以供参考。由于懒得每次写作都需要进行一次部署，所以想要将hexo搭建在腾讯云服务器上，并且部署在本地的服务器以及github上。</p>
+            <h1 id="hexo-建站过程"><a href="#hexo-建站过程" class="headerlink" title="hexo 建站过程"></a>hexo 建站过程</h1><h2 id="初级：搭建hexo并部署本地服务器以及github"><a href="#初级：搭建hexo并部署本地服务器以及github" class="headerlink" title="初级：搭建hexo并部署本地服务器以及github"></a>初级：搭建hexo并部署本地服务器以及github</h2><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo文档</a><br>hexo框架相关文档如上，相关介绍也都在上面，这里不再赘述。我主要阐述我自己部署hexo的过程，以供参考。由于懒得每次写作都需要进行一次部署，所以想要将hexo搭建在腾讯云服务器上，并且部署在本地的服务器以及github上。</p>
 <pre><code>运行环境：
 本地: Mac OS / Window 10
 cvm: ubuntu
@@ -384,6 +383,37 @@ chmod u+s nginx
 <!-- Comments -->
 <div class="col-lg-7 mx-auto nopadding-md">
   <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'false' === true;
+    var verify = 'false' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "f98BWrNijceI1epEOr29TKLO-gzGzoHsz",
+        app_key: "lxfaw08LA0SzHt6cgaUvqm0R",
+        placeholder: "说点什么",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
     
   </div>
 </div>
