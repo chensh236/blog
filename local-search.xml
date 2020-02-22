@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>hexo建站教程（初级）2 —— 百度和google的收录</title>
+    <link href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/"/>
+    <url>/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/</url>
+    
+    <content type="html"><![CDATA[<p>之前主要讲述了hexo的基础建站过程。即使站点搭的很漂亮，文章写的很漂亮，但因为没有google和百度的抓取，这些文章依然很难被别人看到。<br>下面主要讲述百度和google的站点地图提交和主动推送，以便百度和google收录和蜘蛛爬取。</p><h2 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度</h2><p><a href="https://zhuanlan.zhihu.com/p/100922816" target="_blank" rel="noopener">参考文档</a><br>在<a href="https://ziyuan.baidu.com" target="_blank" rel="noopener">百度搜索资源平台</a>，可以添加自己的网站，需要选择http或者https协议。这里使用的是https协议。在此之后还需要进行验证。可以选择比较方便的DNS验证。</p><h3 id="主动推送"><a href="#主动推送" class="headerlink" title="主动推送"></a>主动推送</h3><p>在blog的目录输入命令：<code>npm install hexo-baidu-url-submit --save</code>，在该目录的<code>_config.yml</code>文件中写入：</p><pre><code>baidu_url_submit:  count: 1               # 提交最新的多少个链接  host: www.itrhx.com    # 在百度站长平台中添加的域名  token: *在百度搜索资源平台中获得的token*      # 秘钥  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里</code></pre><p>之后需要检查url是否与百度验证的域名一致：</p><pre><code># URL## If your site is put in a subdirectory, set url as &#39;http://yoursite.com/child&#39; and root as &#39;/child/&#39;url: https://blog.chensh236.com</code></pre><p>检查完成，添加deployer：</p><pre><code>deploy:- type: git  repo:     github: ...    local:  ...  branch: master- type: baidu_url_submitter</code></pre><p>之后运行<code>hexo clean &amp; hexo g -d</code>查看能否正常推送。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网站搭建</tag>
+      
+      <tag>博客</tag>
+      
+      <tag>hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hexo建站过程(初级)</title>
     <link href="/2020/02/21/hexo%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B-%E5%88%9D%E7%BA%A7/"/>
     <url>/2020/02/21/hexo%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B-%E5%88%9D%E7%BA%A7/</url>

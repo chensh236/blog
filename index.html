@@ -144,6 +144,58 @@
     
     
     <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/">
+        <p class="h4 index-header">hexo建站教程（初级）2 —— 百度和google的收录</p>
+      </a>
+
+      <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">之前主要讲述了hexo的基础建站过程。即使站点搭的很漂亮，文章写的很漂亮，但因为没有google和百度的抓取，这些文章依然很难被别人看到。下面主要讲述百度和google的站点地图提交和主动推送，以便百度和google收录和蜘蛛爬取。
+百度参考文档在百度搜索资源平台，可以添加自己的网站，需要选择http或者https协议。这里使用的是https协议。在此之后还需要进行验证。可以选择比较方便的DNS验证。
+主动推送在blog的目录输入命令：npm install hexo-baidu-url-submit --save，在该目录的_config.yml文件中写入：
+baidu_url_submit:
+  count: 1               # 提交最新的多少个链接
+  host: www.itrhx.com    # 在百度站长平台中添加的域名
+  token: *在百度搜索资源平台中获得的token*      # 秘钥
+  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
+之后需要检查url是否与百度验证的域名一致：
+# URL
+</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-22&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%BD%91%E7%BB%9C">网络</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA">网站搭建</a>&nbsp;
+          
+            <a href="/tags/%E5%8D%9A%E5%AE%A2">博客</a>&nbsp;
+          
+            <a href="/tags/hexo">hexo</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2020/02/21/hexo%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B-%E5%88%9D%E7%BA%A7/">
         <p class="h4 index-header">hexo建站过程(初级)</p>
       </a>
