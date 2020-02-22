@@ -158,13 +158,10 @@
 百度参考文档在百度搜索资源平台，可以添加自己的网站，需要选择http或者https协议。这里使用的是https协议。在此之后还需要进行验证。可以选择比较方便的DNS验证。
 主动推送在blog的目录输入命令：npm install hexo-baidu-url-submit --save，在该目录的_config.yml文件中写入：
 baidu_url_submit:
-  count: 1               # 提交最新的多少个链接
-  host: www.itrhx.com    # 在百度站长平台中添加的域名
-  token: *在百度搜索资源平台中获得的token*      # 秘钥
-  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
-之后需要检查url是否与百度验证的域名一致：
-# URL
-</div>
+  count: 1                              # 提交最新的多少个链接
+  host: *自己的域名*                      # 在百度站长平台中添加的域名
+  token: *在百度搜索资源平台中获得的token*   # 秘钥
+  path: baidu_urls.txt                   # 文本文档的地址， 新链接</div>
         </div>
       </a>
 
