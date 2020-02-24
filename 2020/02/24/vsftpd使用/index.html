@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>分类 - 网络 ~ chensh236&#39;s blog</title>
+  <title>vsftpd使用 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 二月 24日 2020, 7:08 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    322 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,60 +156,139 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-<!--  <p class="h4">共计 5 篇文章</p>-->
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">vsftpd使用</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2020/02/24/%E9%85%8D%E7%BD%AEnextcloud%E7%A7%81%E6%9C%89%E4%BA%91%E7%9B%98%E6%9C%8D%E5%8A%A1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">配置nextcloud私有云盘服务</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%893%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站教程（初级）3——添加管理界面与评论</span>
-      <span style="float: right;">02-22</span>
-    </a>
-  
-    
-    <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站教程（初级）2 —— 百度和google的收录</span>
-      <span style="float: right;">02-22</span>
-    </a>
-  
-    
-    <a href="/2020/02/21/hexo%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B-%E5%88%9D%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站过程(初级)</span>
-      <span style="float: right;">02-21</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="vsftpd的使用"><a href="#vsftpd的使用" class="headerlink" title="vsftpd的使用"></a>vsftpd的使用</h1><p><a href="https://www.jianshu.com/p/1a8a4593958a" target="_blank" rel="noopener">参考文档</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>键入命令：<code>sudo apt-get install vsfptd</code></p>
+<p>为了能够正常使用<code>ftp_TLS</code>，需要在<code>/etc/vsftpd.conf</code>中添加：</p>
+<pre><code># 开启 ssl 并指定使用的协议
+ssl_enable=YES
+ssl_tlsv1=YES
+ssl_sslv2=NO
+ssl_sslv3=NO
+# 指定证书和 key 文件
+rsa_cert_file=/*自己的目录*/*证书*.crt
+rsa_private_key_file=/*自己的目录*/*证书*.key
+# 安全选项
+allow_anon_ssl=NO
+force_local_data_ssl=YES
+force_local_logins_ssl=YES
+require_ssl_reuse=NO
+ssl_ciphers=HIGH
+# 指定主动模式时使用的端口范围
+pasv_min_port=*自己设置端口*
+pasv_max_port=*自己设置端口*
+</code></pre><p>重启vsftpd服务即可。</p>
+<h2 id="设置账户"><a href="#设置账户" class="headerlink" title="设置账户"></a>设置账户</h2><p><a href="https://www.cnblogs.com/lantor/p/7600247.html" target="_blank" rel="noopener">参考文档</a></p>
+<p>需要添加账户，并指定主目录：<code>sudo useradd -d /*自己设置目录*/ -s /usr/sbin/nologin *用户名*</code>。之后设置密码：<code>passwd *用户名*</code></p>
+<p>之后通过<code>chown *用户名*:*用户名* *目录*</code>设置文件夹权限。</p>
+<p>下面完成两方面的设置：</p>
+<ul>
+<li>只允许特定用户登陆</li>
+<li>只允许读写主目录</li>
+</ul>
+<pre><code>userlist_enable=YES
+userlist_deny=NO
+userlist_file=/etc/vsftpd/user_list
 
+chroot_local_user=YES
+chroot_list_enable=YES
+chroot_list_file=/etc/vsftpd/chroot_list
+allow_writeable_chroot=YES
+</code></pre><p>其中，<code>chroot_list</code>中的用户可以访问主目录外的其他目录。</p>
+<h2 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h2><p>如果出现乱码问题，可以通过将文件系统字符集设置为<code>utf-8</code>解决。在<code>/etc/vsftpd.conf</code>中设置：<code>utf8_filesystem=YES</code>。在filezila中[站点]中的[字符集]强制使用<code>utf-8</code>编码即可。</p>
 
-              </div>
-            </div>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C">网络</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C">网络</a>
+                
+                  <a class="hover-with-bg" href="/tags/ftp">ftp</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -264,6 +372,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -315,7 +428,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "分类 - 网络&nbsp;",
+        "vsftpd使用&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,

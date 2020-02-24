@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>vsftpd使用</title>
+    <link href="/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="vsftpd的使用"><a href="#vsftpd的使用" class="headerlink" title="vsftpd的使用"></a>vsftpd的使用</h1><p><a href="https://www.jianshu.com/p/1a8a4593958a" target="_blank" rel="noopener">参考文档</a></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>键入命令：<code>sudo apt-get install vsfptd</code></p><p>为了能够正常使用<code>ftp_TLS</code>，需要在<code>/etc/vsftpd.conf</code>中添加：</p><pre><code># 开启 ssl 并指定使用的协议ssl_enable=YESssl_tlsv1=YESssl_sslv2=NOssl_sslv3=NO# 指定证书和 key 文件rsa_cert_file=/*自己的目录*/*证书*.crtrsa_private_key_file=/*自己的目录*/*证书*.key# 安全选项allow_anon_ssl=NOforce_local_data_ssl=YESforce_local_logins_ssl=YESrequire_ssl_reuse=NOssl_ciphers=HIGH# 指定主动模式时使用的端口范围pasv_min_port=*自己设置端口*pasv_max_port=*自己设置端口*</code></pre><p>重启vsftpd服务即可。</p><h2 id="设置账户"><a href="#设置账户" class="headerlink" title="设置账户"></a>设置账户</h2><p><a href="https://www.cnblogs.com/lantor/p/7600247.html" target="_blank" rel="noopener">参考文档</a></p><p>需要添加账户，并指定主目录：<code>sudo useradd -d /*自己设置目录*/ -s /usr/sbin/nologin *用户名*</code>。之后设置密码：<code>passwd *用户名*</code></p><p>之后通过<code>chown *用户名*:*用户名* *目录*</code>设置文件夹权限。</p><p>下面完成两方面的设置：</p><ul><li>只允许特定用户登陆</li><li>只允许读写主目录</li></ul><pre><code>userlist_enable=YESuserlist_deny=NOuserlist_file=/etc/vsftpd/user_listchroot_local_user=YESchroot_list_enable=YESchroot_list_file=/etc/vsftpd/chroot_listallow_writeable_chroot=YES</code></pre><p>其中，<code>chroot_list</code>中的用户可以访问主目录外的其他目录。</p><h2 id="乱码问题"><a href="#乱码问题" class="headerlink" title="乱码问题"></a>乱码问题</h2><p>如果出现乱码问题，可以通过将文件系统字符集设置为<code>utf-8</code>解决。在<code>/etc/vsftpd.conf</code>中设置：<code>utf8_filesystem=YES</code>。在filezila中[站点]中的[字符集]强制使用<code>utf-8</code>编码即可。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>网络</tag>
+      
+      <tag>ftp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>配置nextcloud私有云盘服务</title>
     <link href="/2020/02/24/%E9%85%8D%E7%BD%AEnextcloud%E7%A7%81%E6%9C%89%E4%BA%91%E7%9B%98%E6%9C%8D%E5%8A%A1/"/>
     <url>/2020/02/24/%E9%85%8D%E7%BD%AEnextcloud%E7%A7%81%E6%9C%89%E4%BA%91%E7%9B%98%E6%9C%8D%E5%8A%A1/</url>
