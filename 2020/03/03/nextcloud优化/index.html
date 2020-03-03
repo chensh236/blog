@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>归档 ~ chensh236&#39;s blog</title>
+  <title>nextcloud优化 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期二, 三月 3日 2020, 11:30 中午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    176 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,65 +156,101 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 6 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/03/03/nextcloud%E4%BC%98%E5%8C%96/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">nextcloud优化</span>
-      <span style="float: right;">03-03</span>
-    </a>
-  
-    
-    <a href="/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">vsftpd使用</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2020/02/24/%E9%85%8D%E7%BD%AEnextcloud%E7%A7%81%E6%9C%89%E4%BA%91%E7%9B%98%E6%9C%8D%E5%8A%A1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">配置nextcloud私有云盘服务</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%893%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站教程（初级）3——添加管理界面与评论</span>
-      <span style="float: right;">02-22</span>
-    </a>
-  
-    
-    <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站教程（初级）2 —— 百度和google的收录</span>
-      <span style="float: right;">02-22</span>
-    </a>
-  
-    
-    <a href="/2020/02/21/hexo%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B-%E5%88%9D%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站过程(初级)</span>
-      <span style="float: right;">02-21</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>由于nextcloud提示了一些优化信息，这里进行优化。</p>
+<h4 id="内存限制"><a href="#内存限制" class="headerlink" title="内存限制"></a>内存限制</h4><p>之前限制php-fpm的内存大小为512MB，需要进行更改，在<code>*php-fpm文件夹*/pool.d/www.conf</code>中设置<code>php_admin_value[memory_limit] = 2048M</code>即可。</p>
+<h4 id="getenv-“PATH”-为空"><a href="#getenv-“PATH”-为空" class="headerlink" title="getenv(“PATH”)为空"></a>getenv(“PATH”)为空</h4><p>在前面提到的配置文件中将下面部分取消注释：</p>
+<pre><code>env[HOSTNAME] = $HOSTNAME
+env[PATH] = /usr/local/bin:/usr/bin:/bin
+env[TMP] = /tmp
+env[TMPDIR] = /tmp
+env[TEMP] = /tmp
+</code></pre><h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><ul>
+<li><p>HTTP 请求头 “X-Frame-Options” 没有配置为 “SAMEORIGIN”<br>在nginx的配置文件中</p>
+</li>
+<li><p>HTTP的请求头 “Strict-Transport-Security” 未设置为至少 “15552000” 秒</p>
+</li>
+</ul>
+<p>在nginx的配置文件中设置：</p>
+<pre><code>add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+add_header Strict-Transport-Security &quot;max-age=31536000&quot;; includeSubDomains&quot; always;
+</code></pre><p>重启服务即可。</p>
 
-              </div>
-            </div>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -269,6 +334,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -320,7 +390,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "nextcloud优化&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,
