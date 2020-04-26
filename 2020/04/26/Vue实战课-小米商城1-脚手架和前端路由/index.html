@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>归档 ~ chensh236&#39;s blog</title>
+  <title>Vue实战课 小米商城1 脚手架和前端路由 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 四月 26日 2020, 2:16 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    397 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,59 +156,174 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 8 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">vsftpd使用</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2020/02/24/%E9%85%8D%E7%BD%AEnextcloud%E7%A7%81%E6%9C%89%E4%BA%91%E7%9B%98%E6%9C%8D%E5%8A%A1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">配置nextcloud私有云盘服务</span>
-      <span style="float: right;">02-24</span>
-    </a>
-  
-    
-    <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%893%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站教程（初级）3——添加管理界面与评论</span>
-      <span style="float: right;">02-22</span>
-    </a>
-  
-    
-    <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站教程（初级）2 —— 百度和google的收录</span>
-      <span style="float: right;">02-22</span>
-    </a>
-  
-    
-    <a href="/2020/02/21/hexo%E5%BB%BA%E7%AB%99%E8%BF%87%E7%A8%8B-%E5%88%9D%E7%BA%A7/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">hexo建站过程(初级)</span>
-      <span style="float: right;">02-21</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h2><p>在Node环境中，可以通过以下命令安装vue-cli：</p>
+<pre><code>$ npm i -g @vue/cli
+# OR
+$ yarn global add @vue/cli
+</code></pre><p>如果<code>npm</code>速度较慢，可以使用<code>cnpm</code>，需要先安装<code>cnpm</code>：</p>
+<pre><code>$  npm i -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre><p>安装<code>vue-cli</code>后，可以通过<code>$ vue --version</code>查看<code>vue-cli</code>的版本。通过<code>$ vue create [project name]</code>创建新的vue项目。可以通过<code>vue ui</code>进入web界面对vue项目进行管理。</p>
+<h2 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h2><p>这里使用的是hash路由。在向后端发起请求时，hash路由的内容并不会发送到后端。使用ajax可以在不重新加载整个页面的情况下与后端交互更新部分内容。<br>该项目使用<code>axios</code>以代替<code>resource</code>，并且使用<code>vue-axios</code>将<code>axios</code>绑定在vue中，方便使用。<br><code>router.js</code>的定义如下：</p>
+<pre><code class="lang-js">import Vue from &#39;vue&#39;
+import Router from &#39;vue-router&#39;
+import Home from &#39;./pages/home&#39;
+import Index from &#39;./pages/index&#39;
+import Product from &#39;./pages/product&#39;
+import Detail from &#39;./pages/detail&#39;
+import Cart from &#39;./pages/cart&#39;
+import Order from &#39;./pages/order&#39;
+import OrderConfirm from &#39;./pages/orderConfirm&#39;
+import OrderList from &#39;./pages/orderList&#39;
+import OrderPay from &#39;./pages/orderPay&#39;
+Vue.use(Router)
 
-              </div>
-            </div>
+export default new Router({
+    routes:[
+        {
+            path: &#39;/&#39;,
+            name: &#39;home&#39;,
+            component: Home,
+            children: [
+                {
+                    path: &#39;/index&#39;,
+                    name: &#39;index&#39;,
+                    component: Index
+                },
+                {
+                    path: &#39;/product/:id&#39;,
+                    name: &#39;product&#39;,
+                    component: Product
+                },
+                {
+                    path: &#39;/detail/:id&#39;,
+                    name: &#39;detail&#39;,
+                    component: Detail
+                }
+            ]
+        },
+        {
+            path: &#39;/cart&#39;,
+            name: &#39;cart&#39;,
+            component: Cart
+        },
+        {
+            path: &#39;/order&#39;,
+            name: &#39;order&#39;,
+            component: Order,
+            children:[
+                {
+                    path: &#39;/list&#39;,
+                    name: &#39;order-list&#39;,
+                    component: OrderList
+                },
+                {
+                    path: &#39;/confirm&#39;,
+                    name: &#39;order-confirm&#39;,
+                    component: OrderConfirm
+                },
+                {
+                    path: &#39;/pay&#39;,
+                    name: &#39;order-pay&#39;,
+                    component: OrderPay
+                }
+            ]
+        },
+    ]
+})
+</code></pre>
+<p>在<code>main.js</code>中，import该router对象，可以使用前端路由。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -263,6 +407,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -314,7 +463,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "Vue实战课 小米商城1 脚手架和前端路由&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,
