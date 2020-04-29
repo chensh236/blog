@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Vue实战课 小米商城3 环境设置和Mock</title>
+    <link href="/2020/04/29/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E3-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE%E5%92%8CMock/"/>
+    <url>/2020/04/29/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E3-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE%E5%92%8CMock/</url>
+    
+    <content type="html"><![CDATA[<h2 id="接口设置"><a href="#接口设置" class="headerlink" title="接口设置"></a>接口设置</h2><p>考虑三种跨域方式：CROS、JSONP、代理。</p><p>其中CROS、JSONP方式将baseURL封装入模块中，可以设置baseURL跟随不同的环境而变化。代理设置需要单独设置。</p><p>env.js</p><pre><code class="lang-javascript">let baseURL// CROS跨域，JSONP跨域使用，代理跨域不使用// web-pack 中有 --mode参数switch(process.env.NODE_ENV) {    case &#39;development&#39;:        baseURL = &#39;http://dev-mall-pre.springboot.cn/api&#39;        break    case &#39;test&#39;:        baseURL = &#39;http://test-mall-pre.springboot.cn/api&#39;        break    case &#39;production&#39;:        baseURL = &#39;http://mall-pre.springboot.cn/api&#39;        break    default:        baseURL = &#39;http://mall-pre.springboot.cn/api&#39;        break}export default {    baseURL}</code></pre><p>vue.config.js</p><pre><code class="lang-javascript">// 代理跨域使用module.exports = {    devServer:{        host: &#39;localhost&#39;,        port:8080,        proxy:{            &#39;/api&#39;:{                target: &#39;https://www.imooc.com&#39;,                changeOrigin: true,                pathRewrite:{                    &#39;/api&#39;: &#39;&#39;                }            }        }    }}</code></pre><h2 id="设置环境模式"><a href="#设置环境模式" class="headerlink" title="设置环境模式"></a>设置环境模式</h2><p>在<code>package.json</code>中设置环境的模式，如<code>&quot;serve&quot;: &quot;vue-cli-service serve --mode=development&quot;</code>。可有<code>development</code>、<code>test</code>、<code>production</code>。如需新增，可以在根目录创建<code>.env.[name]</code>，其中设置<code>NODE_ENV = &#39;[name]&#39;</code></p><h2 id="Mock设置"><a href="#Mock设置" class="headerlink" title="Mock设置"></a>Mock设置</h2><ul><li><p>本地创建json</p><pre><code class="lang-javascript">this.axios.get(&#39;/mock/user/login.json&#39;).then((res)=&gt;{      this.res = res    })</code></pre></li><li><p>easy-mock</p></li><li><p>集成Mock API (mock.js)</p></li></ul><p>在<code>/src/mock</code>中新建<code>api.js</code>：</p><pre><code class="lang-javascript">import Mock from &#39;mockjs&#39;Mock.mock(&#39;/api/user/login&#39;, {    &quot;status&quot;: 0,    &quot;data&quot;: {        &quot;id&quot;: 12,        &quot;username&quot;: &quot;admin&quot;,        &quot;email&quot;: &quot;admin@51purse.com&quot;,        &quot;phone&quot;: null,        &quot;role&quot;: 0,        &quot;createTime&quot;: 1479048325000,        &quot;updateTime&quot;: 1479048325000    }})</code></pre><p>在<code>main.js</code>中进行设置，注意使用require而不能是import，import在预编译阶段便进行加载，所有的请求会被Mockjs拦截。</p><pre><code class="lang-javascript">const mock = true/***  执行的时候加载*/if (mock){  require(&#39;./mock/api&#39;)}</code></pre><p>在请求时：</p><pre><code class="lang-javascript">this.axios.get(&#39;/user/login&#39;).then((res)=&gt;{      this.res = res      console.log(res)    })</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Vue实战1</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Vue实战1</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Vue实战课 小米商城1 脚手架和前端路由</title>
     <link href="/2020/04/26/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E1-%E8%84%9A%E6%89%8B%E6%9E%B6%E5%92%8C%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/"/>
     <url>/2020/04/26/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E1-%E8%84%9A%E6%89%8B%E6%9E%B6%E5%92%8C%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/</url>

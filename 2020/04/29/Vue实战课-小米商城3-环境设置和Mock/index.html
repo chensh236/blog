@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>分类 ~ chensh236&#39;s blog</title>
+  <title>Vue实战课 小米商城3 环境设置和Mock ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期三, 四月 29日 2020, 11:29 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    403 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,22 +156,184 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="接口设置"><a href="#接口设置" class="headerlink" title="接口设置"></a>接口设置</h2><p>考虑三种跨域方式：CROS、JSONP、代理。</p>
+<p>其中CROS、JSONP方式将baseURL封装入模块中，可以设置baseURL跟随不同的环境而变化。代理设置需要单独设置。</p>
+<p>env.js</p>
+<pre><code class="lang-javascript">let baseURL
+// CROS跨域，JSONP跨域使用，代理跨域不使用
+// web-pack 中有 --mode参数
+switch(process.env.NODE_ENV) {
+    case &#39;development&#39;:
+        baseURL = &#39;http://dev-mall-pre.springboot.cn/api&#39;
+        break
+    case &#39;test&#39;:
+        baseURL = &#39;http://test-mall-pre.springboot.cn/api&#39;
+        break
+    case &#39;production&#39;:
+        baseURL = &#39;http://mall-pre.springboot.cn/api&#39;
+        break
+    default:
+        baseURL = &#39;http://mall-pre.springboot.cn/api&#39;
+        break
+}
+
+export default {
+    baseURL
+}
+</code></pre>
+<p>vue.config.js</p>
+<pre><code class="lang-javascript">// 代理跨域使用
+module.exports = {
+    devServer:{
+        host: &#39;localhost&#39;,
+        port:8080,
+        proxy:{
+            &#39;/api&#39;:{
+                target: &#39;https://www.imooc.com&#39;,
+                changeOrigin: true,
+                pathRewrite:{
+                    &#39;/api&#39;: &#39;&#39;
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="设置环境模式"><a href="#设置环境模式" class="headerlink" title="设置环境模式"></a>设置环境模式</h2><p>在<code>package.json</code>中设置环境的模式，如<code>&quot;serve&quot;: &quot;vue-cli-service serve --mode=development&quot;</code>。可有<code>development</code>、<code>test</code>、<code>production</code>。如需新增，可以在根目录创建<code>.env.[name]</code>，其中设置<code>NODE_ENV = &#39;[name]&#39;</code></p>
+<h2 id="Mock设置"><a href="#Mock设置" class="headerlink" title="Mock设置"></a>Mock设置</h2><ul>
+<li><p>本地创建json</p>
+<pre><code class="lang-javascript">this.axios.get(&#39;/mock/user/login.json&#39;).then((res)=&gt;{
+      this.res = res
+    })
+</code></pre>
+</li>
+<li><p>easy-mock</p>
+</li>
+<li><p>集成Mock API (mock.js)</p>
+</li>
+</ul>
+<p>在<code>/src/mock</code>中新建<code>api.js</code>：</p>
+<pre><code class="lang-javascript">import Mock from &#39;mockjs&#39;
+Mock.mock(&#39;/api/user/login&#39;, {
+    &quot;status&quot;: 0,
+    &quot;data&quot;: {
+        &quot;id&quot;: 12,
+        &quot;username&quot;: &quot;admin&quot;,
+        &quot;email&quot;: &quot;admin@51purse.com&quot;,
+        &quot;phone&quot;: null,
+        &quot;role&quot;: 0,
+        &quot;createTime&quot;: 1479048325000,
+        &quot;updateTime&quot;: 1479048325000
+    }
+})
+</code></pre>
+<p>在<code>main.js</code>中进行设置，注意使用require而不能是import，import在预编译阶段便进行加载，所有的请求会被Mockjs拦截。</p>
+<pre><code class="lang-javascript">const mock = true
+/*
+**  执行的时候加载
+*/
+if (mock){
+  require(&#39;./mock/api&#39;)
+}
+</code></pre>
+<p>在请求时：</p>
+<pre><code class="lang-javascript">this.axios.get(&#39;/user/login&#39;).then((res)=&gt;{
+      this.res = res
+      console.log(res)
+    })
+</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
                 
-
-<ul class="category-tree-list"><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/Vue%E5%AE%9E%E6%88%981/">Vue实战1</a><span class="category-tree-list-count">3</span></li><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a><span class="category-tree-list-count">5</span></li></ul>
-
-
-              </div>
-            </div>
+                  <a class="hover-with-bg" href="/categories/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -226,6 +417,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -277,7 +473,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "分类&nbsp;",
+        "Vue实战课 小米商城3 环境设置和Mock&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,
