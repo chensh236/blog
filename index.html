@@ -144,6 +144,45 @@
     
     
     <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/05/13/Ubuntu%E4%B8%8B%E7%9A%84gitLab%E9%83%A8%E7%BD%B2/">
+        <p class="h4 index-header">Ubuntu下的gitLab部署</p>
+      </a>
+
+      <a href="/2020/05/13/Ubuntu%E4%B8%8B%E7%9A%84gitLab%E9%83%A8%E7%BD%B2/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Ubuntu下的gitLab部署Gitlab部署安装依赖：
+$ sudo apt-get update
+$ sudo apt-get install -y curl openssh-server ca-certificates
+
+# 安装postfix，选择Internet Site
+$ sudo apt-get install -y postfix
+$ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | sudo bash
+$ sudo apt-get install gitlab-ee
+Nginx反代理将/etc/gitlab/gitlab.rb中的729行、731行改为
+gitlab_workhorse[&#39;listen_network&#39;] = &quot;tcp&quot;
+gitlab_workhorse[&#39;listen_addr&#39;] = &quot;127.0.0.1:[port]&quot;
+其中[port]为自定义端口，</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-13&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2020/04/29/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E3-%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE%E5%92%8CMock/">
         <p class="h4 index-header">Vue实战课 小米商城3 环境设置和Mock</p>
       </a>
