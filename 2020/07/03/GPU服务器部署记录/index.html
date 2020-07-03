@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>归档 ~ chensh236&#39;s blog</title>
+  <title>GPU服务器部署记录 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期五, 七月 3日 2020, 3:08 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    370 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,35 +156,141 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/2020/03/03/nextcloud%E4%BC%98%E5%8C%96/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">nextcloud优化</span>
-      <span style="float: right;">03-03</span>
-    </a>
-  
-</div>
 
-
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="硬盘挂载"><a href="#硬盘挂载" class="headerlink" title="硬盘挂载"></a>硬盘挂载</h2><p>输入<code>sudo fdisk -l</code>，查看信息。</p>
+<p>格式化硬盘：<code>sudo mkfs.ext4 /dev/sda</code>。</p>
+<p>创建目录：<code>mkdir /data</code>。</p>
+<p>挂载分区：<code>sudo mount /dev/sda /data</code></p>
+<p>查看UUID：<code>sudo blkid</code></p>
+<p>复制对应的UUID，在<code>/etc/fstab</code>中进行修改：<code>UUID=[] /data ext4 defaults 0 1</code></p>
+<h2 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h2><p>输入命令<code>sudo vim /etc/modprobe.d/blacklist.conf</code>。<br>在末尾添加：</p>
+<pre><code>blacklist nouveau
+options nouveau modeset=0
+</code></pre><h2 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h2><p>输入命令<code>chmod -R 777 [dir]</code></p>
+<h2 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h2><p>安装gcc:</p>
+<p><code>sudo apt install build-essential</code></p>
+<p>安装驱动：<code>sudo ./NVIDIA-Linux-x86_64-410.78.run</code></p>
+<p>通过<code>nvidia-smi</code>查看驱动是否存在。</p>
+<h2 id="cuda安装"><a href="#cuda安装" class="headerlink" title="cuda安装"></a>cuda安装</h2><p>安装cuda命令：</p>
+<pre><code>sudo chmod +x cuda_9.0.176_384.81_linux-run
+sudo ./cuda_9.0.176_384.81_linux-run
+</code></pre><p>如果安装失败缺少toolkit，则通过<code>apt-get install</code>安装</p>
+<p><code>sudo apt install nvidia-cuda-toolkit</code></p>
+<p>通过<code>nvcc -V</code>进行测试。</p>
+<p>在文件<code>~/.bashrc</code>与<code>/etc/profile</code>中添加：</p>
+<pre><code>export PATH=/usr/local/cuda-9.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda/extras/CUPTI/lib64/:$LD_LIBRARY_PATH
+</code></pre><p>之后source即可。</p>
+<h2 id="安装cudnn"><a href="#安装cudnn" class="headerlink" title="安装cudnn"></a>安装cudnn</h2><pre><code>tar -zxvf cudnn-9.0-linux-x64-v7.tgz
+  sudo cp cuda/include/cudnn.h /usr/lib/cuda/include
+  sudo cp cuda/lib64/libcudnn* /usr/lib/cuda/lib64
+  sudo chmod a+r /usr/lib/cuda/include/cudnn.h /usr/lib/cuda/lib64/libcudnn*
+</code></pre><h3 id="vnc设置"><a href="#vnc设置" class="headerlink" title="vnc设置"></a>vnc设置</h3><pre><code>sudo apt-get update
+sudo apt install xfce4 xfce4-goodies tightvncserver
+</code></pre><p>初始密码设置为970926</p>
+<p>关闭窗口：<code>vncserver -kill :2</code></p>
+<p>在目录<code>~/.vnc/xstartup</code>中，添加：</p>
+<pre><code>#!/bin/bash
+xrdb $HOME/.Xresources
+startxfce4 &amp;
+</code></pre><p>输入命令<code>sudo chmod +x ~/.vnc/xstartup</code>，启动vnc:<code>vncserver</code>。</p>
+<h3 id="matlab-r2017b"><a href="#matlab-r2017b" class="headerlink" title="matlab r2017b"></a>matlab r2017b</h3><pre><code>mkdir /home/&lt;user name&gt;/Matlab
+sudo mount -t auto -o loop *dvd1.iso所在的绝对路径 /home/&lt;user name&gt;/Matlab
+# 不能在在安装目录下
+sudo /挂载目录/install
+</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/Ubuntu">Ubuntu</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/Ubuntu">Ubuntu</a>
+                
+                  <a class="hover-with-bg" href="/tags/GPU%E6%9C%8D%E5%8A%A1%E5%99%A8">GPU服务器</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -239,6 +374,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -290,7 +430,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "GPU服务器部署记录&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,
