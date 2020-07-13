@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>GPU服务器部署记录 ~ chensh236&#39;s blog</title>
+  <title>Ubuntu18.04 GPU服务器部署记录 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -130,7 +130,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    370 字
+                    462 字
                   </span>&nbsp;
                 
 
@@ -170,14 +170,22 @@
 <p>创建目录：<code>mkdir /data</code>。</p>
 <p>挂载分区：<code>sudo mount /dev/sda /data</code></p>
 <p>查看UUID：<code>sudo blkid</code></p>
-<p>复制对应的UUID，在<code>/etc/fstab</code>中进行修改：<code>UUID=[] /data ext4 defaults 0 1</code></p>
-<h2 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h2><p>输入命令<code>sudo vim /etc/modprobe.d/blacklist.conf</code>。<br>在末尾添加：</p>
+<p>复制对应的UUID，在<code>/etc/fstab</code>中进行修改：<code>UUID=[] /data ext4 defaults 0 1</code><br>之后执行命令<code>sudo mount -a</code>挂载硬盘。</p>
+<p>注：取消挂载<code>umount /dev/sda</code></p>
+<h2 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h2><p>输入命令<code>chmod -R 777 [dir]</code>，为文件夹设置权限，所有用户可以访问。</p>
+<h2 id="安装NVIDIA显卡驱动"><a href="#安装NVIDIA显卡驱动" class="headerlink" title="安装NVIDIA显卡驱动"></a>安装NVIDIA显卡驱动</h2><h3 id="禁用nouveau"><a href="#禁用nouveau" class="headerlink" title="禁用nouveau"></a>禁用nouveau</h3><p>输入命令<code>sudo vim /etc/modprobe.d/blacklist.conf</code>。<br>在末尾添加：</p>
 <pre><code>blacklist nouveau
 options nouveau modeset=0
-</code></pre><h2 id="设置权限"><a href="#设置权限" class="headerlink" title="设置权限"></a>设置权限</h2><p>输入命令<code>chmod -R 777 [dir]</code></p>
-<h2 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h2><p>安装gcc:</p>
-<p><code>sudo apt install build-essential</code></p>
-<p>安装驱动：<code>sudo ./NVIDIA-Linux-x86_64-410.78.run</code></p>
+</code></pre><p>安装gcc:</p>
+<pre><code>$ sudo apt-get install gcc-5
+$ sudo apt-get install g++-5
+$ cd /usr/bin
+$ sudo rm gcc
+$ ln -s gcc-5 gcc
+$ sudo rm g++
+$ ln -s g++-5 g++
+</code></pre><h3 id="驱动安装"><a href="#驱动安装" class="headerlink" title="驱动安装"></a>驱动安装</h3><p><code>sudo apt install build-essential</code></p>
+<p>安装驱动（如果在Destkop模式下需要按Alt + F2进入命令行模式）：<code>sudo ./NVIDIA-Linux-x86_64-410.78.run</code></p>
 <p>通过<code>nvidia-smi</code>查看驱动是否存在。</p>
 <h2 id="cuda安装"><a href="#cuda安装" class="headerlink" title="cuda安装"></a>cuda安装</h2><p>安装cuda命令：</p>
 <pre><code>sudo chmod +x cuda_9.0.176_384.81_linux-run
@@ -202,10 +210,10 @@ sudo apt install xfce4 xfce4-goodies tightvncserver
 xrdb $HOME/.Xresources
 startxfce4 &amp;
 </code></pre><p>输入命令<code>sudo chmod +x ~/.vnc/xstartup</code>，启动vnc:<code>vncserver</code>。</p>
-<h3 id="matlab-r2017b"><a href="#matlab-r2017b" class="headerlink" title="matlab r2017b"></a>matlab r2017b</h3><pre><code>mkdir /home/&lt;user name&gt;/Matlab
-sudo mount -t auto -o loop *dvd1.iso所在的绝对路径 /home/&lt;user name&gt;/Matlab
+<h3 id="matlab-r2017b"><a href="#matlab-r2017b" class="headerlink" title="matlab r2017b"></a>matlab r2017b</h3><pre><code>$ mkdir /home/&lt;user name&gt;/Matlab
+$ sudo mount -t auto -o loop *dvd1.iso所在的绝对路径 /home/&lt;user name&gt;/Matlab
 # 不能在在安装目录下
-sudo /挂载目录/install
+$ sudo /挂载目录/install
 </code></pre>
             <hr>
           </div>
@@ -430,7 +438,7 @@ sudo /挂载目录/install
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "GPU服务器部署记录&nbsp;",
+        "Ubuntu18.04 GPU服务器部署记录&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,

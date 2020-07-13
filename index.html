@@ -144,8 +144,60 @@
     
     
     <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/07/13/Ubuntu18-04%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Ubuntu18.04配置</p>
+      </a>
+
+      <a href="/2020/07/13/Ubuntu18-04%E9%85%8D%E7%BD%AE/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Tpoyra安装$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+$ sudo add-apt-repository &#39;deb http://typora.io linux/&#39;
+$ sudo apt-get update
+$ sudo apt-get install typora
+KXSWbash &lt;(curl -s -L http://dl.thinker.ink/install.sh)
+deep-in-container安装Deepin wine Buntu
+Deepin wine containers for Ubuntu
+换源在Ubuntu18.04中，可以通过“软件和更新”中修改源。
+另外也可以通过修改vim /etc/apt/source.list文件，并执行：
+$ sudo apt-get update
+$ sudo apt-get upgrade
+实现源的更新。
+deb http://mirrors.aliyun.com/ubuntu/ </div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-13&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/Ubuntu">Ubuntu</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Ubuntu18-04">Ubuntu18.04</a>&nbsp;
+          
+            <a href="/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2">服务部署</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2020/07/03/GPU%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">
-        <p class="h4 index-header">GPU服务器部署记录</p>
+        <p class="h4 index-header">Ubuntu18.04 GPU服务器部署记录</p>
       </a>
 
       <a href="/2020/07/03/GPU%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/">
@@ -159,18 +211,18 @@
 创建目录：mkdir /data。
 挂载分区：sudo mount /dev/sda /data
 查看UUID：sudo blkid
-复制对应的UUID，在/etc/fstab中进行修改：UUID=[] /data ext4 defaults 0 1
-禁用nouveau输入命令sudo vim /etc/modprobe.d/blacklist.conf。在末尾添加：
+复制对应的UUID，在/etc/fstab中进行修改：UUID=[] /data ext4 defaults 0 1之后执行命令sudo mount -a挂载硬盘。
+注：取消挂载umount /dev/sda
+设置权限输入命令chmod -R 777 [dir]，为文件夹设置权限，所有用户可以访问。
+安装NVIDIA显卡驱动禁用nouveau输入命令sudo vim /etc/modprobe.d/blacklist.conf。在末尾添加：
 blacklist nouveau
 options nouveau modeset=0
-设置权限输入命令chmod -R 777 [dir]
-安装驱动安装gcc:
-sudo apt install build-essential
-安装驱动：sudo ./NVIDIA-Linux-x86_64-410.78.run
-通过nvidia-smi查看驱动是否存在。
-cuda安装安装cuda命令：
-sudo chmod +x cuda_9.0.176_384.81_linux-run
-sudo ./cuda_9.0.1</div>
+安装gcc:
+$ sudo apt-get install gcc-5
+$ sudo apt-get install g++-5
+$ cd /usr/bin
+$ sudo rm gcc
+$ ln -s gcc-5 gc</div>
         </div>
       </a>
 
@@ -230,6 +282,20 @@ gitlab_workhorse[&#39;listen_addr&#39;] = &quot;127.0.0.1:[port]&quot;
           <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-13&nbsp;&nbsp;
         
         
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/Ubuntu">Ubuntu</a>&nbsp;
+          
+            <a href="/categories/GitLab">GitLab</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Ubuntu">Ubuntu</a>&nbsp;
+          
+            <a href="/tags/GitLab">GitLab</a>&nbsp;
+          
         
       </div>
     </div>
@@ -608,55 +674,6 @@ admin:
   password_hash: ...
   secret: ...
   deployC</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-22&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E7%BD%91%E7%BB%9C">网络</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA">网站搭建</a>&nbsp;
-          
-            <a href="/tags/%E5%8D%9A%E5%AE%A2">博客</a>&nbsp;
-          
-            <a href="/tags/hexo">hexo</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/">
-        <p class="h4 index-header">hexo建站教程（初级）2 —— 百度和google的收录</p>
-      </a>
-
-      <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B2/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">之前主要讲述了hexo的基础建站过程。即使站点搭的很漂亮，文章写的很漂亮，但因为没有google和百度的抓取，这些文章依然很难被别人看到。下面主要讲述百度和google的站点地图提交和主动推送，以便百度和google收录和蜘蛛爬取。
-百度参考文档在百度搜索资源平台，可以添加自己的网站，需要选择http或者https协议。这里使用的是https协议。在此之后还需要进行验证。可以选择比较方便的DNS验证。
-主动推送在blog的目录输入命令：npm install hexo-baidu-url-submit --save，在该目录的_config.yml文件中写入：
-baidu_url_submit:
-  count: 1                              # 提交最新的多少个链接
-  host: *自己的域名*                      # 在百度站长平台中添加的域名
-  token: *在百度搜索资源平台中获得的token*   # 秘钥
-  path: baidu_urls.txt                   # 文本文档的地址， 新链接</div>
         </div>
       </a>
 

@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>标签 ~ chensh236&#39;s blog</title>
+  <title>Ubuntu18.04配置 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 七月 13日 2020, 6:38 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    255 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,22 +156,126 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/GPU%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 15px; color: #bbe">GPU服务器</a> <a href="/tags/GitLab/" style="font-size: 15px; color: #bbe">GitLab</a> <a href="/tags/Storage/" style="font-size: 15px; color: #bbe">Storage</a> <a href="/tags/Ubuntu/" style="font-size: 22.5px; color: #779bd3">Ubuntu</a> <a href="/tags/Ubuntu18-04/" style="font-size: 15px; color: #bbe">Ubuntu18.04</a> <a href="/tags/Vue%E5%AE%9E%E6%88%981/" style="font-size: 30px; color: #337ab7">Vue实战1</a> <a href="/tags/ftp/" style="font-size: 15px; color: #bbe">ftp</a> <a href="/tags/hexo/" style="font-size: 30px; color: #337ab7">hexo</a> <a href="/tags/nextcloud/" style="font-size: 15px; color: #bbe">nextcloud</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 30px; color: #337ab7">博客</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/" style="font-size: 15px; color: #bbe">服务部署</a> <a href="/tags/%E7%BB%B4%E6%8A%A4/" style="font-size: 15px; color: #bbe">维护</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 30px; color: #337ab7">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px; color: #bbe">网络</a>
-</div>
-              </div>
-            </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="Tpoyra安装"><a href="#Tpoyra安装" class="headerlink" title="Tpoyra安装"></a>Tpoyra安装</h2><pre><code>$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE
+$ sudo add-apt-repository &#39;deb http://typora.io linux/&#39;
+$ sudo apt-get update
+$ sudo apt-get install typora
+</code></pre><h2 id="KXSW"><a href="#KXSW" class="headerlink" title="KXSW"></a>KXSW</h2><p><code>bash &lt;(curl -s -L http://dl.thinker.ink/install.sh)</code></p>
+<h2 id="deep-in-container安装"><a href="#deep-in-container安装" class="headerlink" title="deep-in-container安装"></a>deep-in-container安装</h2><p><a href="https://link.zhihu.com/?target=https%3A//github.com/wszqkzqk/deepin-wine-ubuntu">Deepin wine Buntu</a></p>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/wszqkzqk/deepin-wine-containers-for-ubuntu">Deepin wine containers for Ubuntu</a></p>
+<h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>在Ubuntu18.04中，可以通过“软件和更新”中修改源。</p>
+<p>另外也可以通过修改<code>vim /etc/apt/source.list</code>文件，并执行：</p>
+<pre><code>$ sudo apt-get update
+$ sudo apt-get upgrade
+</code></pre><p>实现源的更新。</p>
+<pre><code>deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre><h2 id="figlet（终端下的艺术字）"><a href="#figlet（终端下的艺术字）" class="headerlink" title="figlet（终端下的艺术字）"></a>figlet（终端下的艺术字）</h2><pre><code>$ sudo apt-get install figlet
+$ echo chensh236 | figlet
+</code></pre><h2 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h2><p><a href="https://link.zhihu.com/?target=http%3A//www.wps.cn/product/wpslinux">WPS</a></p>
+<h2 id="indicator-multiload"><a href="#indicator-multiload" class="headerlink" title="indicator-multiload"></a>indicator-multiload</h2><p><code>sudo apt install indicator-multiload</code></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/Ubuntu">Ubuntu</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/Ubuntu18-04">Ubuntu18.04</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2">服务部署</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -226,6 +359,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -277,7 +415,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签&nbsp;",
+        "Ubuntu18.04配置&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,
