@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/ava.png">
+  <link rel="icon" type="image/png" href="/img/ava.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="Sihang Chen">
+  <meta name="keywords" content="">
+  <title>强化学习笔记 - Chapter2 ~ chensh236&#39;s blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>chensh236's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" false
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期三, 七月 15日 2020, 11:24 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    822 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="Chapter-2-多臂赌博机"><a href="#Chapter-2-多臂赌博机" class="headerlink" title="Chapter 2 多臂赌博机"></a>Chapter 2 多臂赌博机</h1><h2 id="k臂赌博机问题"><a href="#k臂赌博机问题" class="headerlink" title="k臂赌博机问题"></a>k臂赌博机问题</h2><p>k臂赌博机有k个控制杆，需要学会将动作集中到最好的控制杆上。重复在k个选项或动作中做出选择，做出选择后得到一定数值的收益，收益由动作决定的<strong>平稳概率</strong>分布产生。</p>
+<p>目标：最大化一段时间内的总收益。</p>
+<p>任意动作a对应的价值为$q_*(a) $，是给定动作a时的收益期望：</p>
+<script type="math/tex; mode=display">
+q_*(a)\doteq E[R_t | A_t = a]</script><p>动作a在时刻t的价值$Q<em>t(a)$希望接近$q</em>*(a)$。</p>
+<p>讲对应最高估计价值的动作成为贪心(greedy)动作。选择贪心的动作为试探(exploration)，非贪心的动作为开发(exploitation)。</p>
+<h2 id="动作-价值方法"><a href="#动作-价值方法" class="headerlink" title="动作-价值方法"></a>动作-价值方法</h2><p>动作的价值的真实值是选择这个动作的期望收益</p>
+<script type="math/tex; mode=display">
+Q_t(a)\doteq \frac{\sum_{i = 1}^{t - 1} R_i  \cdot  1_{A_i = a}} {\sum_{i = 1}^{t - 1}1_{A_i = a}}</script><p>t时刻前通过执行动作a得到的收益总和 / 执行次数。大数定理：$Q<em>t(a) -&gt; q</em>*(a)$</p>
+<p>贪心动作选择：</p>
+<script type="math/tex; mode=display">
+A_t \doteq argmax_a Q_t(a)</script><p>$\epsilon-greedy$ 大部分时间贪心，偶尔独立于动作-价值估计方法从所有动作中等概率做出选择。</p>
+<h2 id="增量式实现"><a href="#增量式实现" class="headerlink" title="增量式实现"></a>增量式实现</h2><p>动作-价值方法把动作价值作为观测到的收益的样本均值来估计。通过增量式实现高效计算均值。某个动作被选择n-1次之后的动作价值为：</p>
+<script type="math/tex; mode=display">
+Q_n \doteq \frac{R_1 + R2 + ... + R_{n - 1}}{n-1}</script><p><img src="https://ftp.bmp.ovh/imgs/2020/07/2e638d7c1123f4fc.png" srcset="/img/loading.gif" alt=""></p>
+<p>参数更新：新估计值&lt;-旧估计值+步长x[目标-旧估计值]</p>
+<p>处理动作a的第n个收益使用的步长$\frac{1}{n}$，记为$\alpha$。</p>
+<h2 id="非平稳问题"><a href="#非平稳问题" class="headerlink" title="非平稳问题"></a>非平稳问题</h2><p>取平均的方法对于平稳问题适合，但收益的概率随着时间变化而变化，使用固定步长对收益均值$Q_n$增量更新：</p>
+<script type="math/tex; mode=display">
+Q_{n+1} \doteq Q_n + \alpha [R_n - Q_n]</script><p>推导：</p>
+<p><img src="https://ftp.bmp.ovh/imgs/2020/07/40d5220b2b9dac81.png" srcset="/img/loading.gif" alt="c202"></p>
+<p>$Q_{n + 1}$成为对过去收益和初始的估计$Q_1$的加权平均。权重值以指数形式递减，指数近因加权平均(exponential recency-weighted average)</p>
+<h2 id="乐观-Optimistic-的初始值"><a href="#乐观-Optimistic-的初始值" class="headerlink" title="乐观(Optimistic)的初始值"></a>乐观(Optimistic)的初始值</h2><p>前面的Q值计算方法依赖$Q_1$，对于采样平均法(sample-average)，动作-价值方法,当所有动作至少选择一次则消失。对于a是常数项的情况，偏差随时间逐渐减小，并不会消失。$Q_1$可以作为超参数（先验知识）。$Q_1$过大-&gt;过度乐观的估计，因为无论哪个动作收益都比原来的小，倾向于使用其他动作。</p>
+<h2 id="UCB-置信度上界的动作选择"><a href="#UCB-置信度上界的动作选择" class="headerlink" title="UCB 置信度上界的动作选择"></a>UCB 置信度上界的动作选择</h2><script type="math/tex; mode=display">
+A_t \doteq argmax_a [Q_t(a) + c\sqrt{\frac{ln t}{N_t(a)}}]</script><p>c &gt; 0, $N_t(a)$表示在t之前动作a被选择的次数。简单平稳问题可以提升性能，复杂非平稳问题不可用（处理大的状态空间）。</p>
+<h2 id="梯度赌博机算法"><a href="#梯度赌博机算法" class="headerlink" title="梯度赌博机算法"></a>梯度赌博机算法</h2><p>引入数值化偏好函数(preference)$H_t$</p>
+<script type="math/tex; mode=display">
+Pr\{A_{t} = a\} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}} = \pi_t{a}</script><p>$\pi_t(a)$表示动作a在t时刻被选择的概率。</p>
+<script type="math/tex; mode=display">
+H_{t+1}(a) = H_{t}(a) - \alpha(R_t - \bar{R_t})(1-\pi_t(a))</script><p>$\bar{R_t}$: t时刻内收益的平均值，作为基准收益，如果高于它，选择该动作概率增加。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0">强化学习</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%AC%AC%E4%BA%8C%E7%AB%A0">第二章</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+  
+  <br>
+
+
+
+    
+  <!-- 备案信息 -->
+  <a href="http://beian.miit.gov.cn/" target="_blank"
+     rel="nofollow noopener">粤ICP备18156231号-1</a>
+  
+
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+    <!-- Baidu Analytics -->
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?00fdf5f709687befb2c41dc6fd8484d8";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "强化学习笔记 - Chapter2&nbsp;",
+      ],
+      cursorChar: "|",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

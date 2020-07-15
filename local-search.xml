@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>强化学习笔记 - Chapter2</title>
+    <link href="/2020/07/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Chapter2/"/>
+    <url>/2020/07/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Chapter2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Chapter-2-多臂赌博机"><a href="#Chapter-2-多臂赌博机" class="headerlink" title="Chapter 2 多臂赌博机"></a>Chapter 2 多臂赌博机</h1><h2 id="k臂赌博机问题"><a href="#k臂赌博机问题" class="headerlink" title="k臂赌博机问题"></a>k臂赌博机问题</h2><p>k臂赌博机有k个控制杆，需要学会将动作集中到最好的控制杆上。重复在k个选项或动作中做出选择，做出选择后得到一定数值的收益，收益由动作决定的<strong>平稳概率</strong>分布产生。</p><p>目标：最大化一段时间内的总收益。</p><p>任意动作a对应的价值为$q_*(a) $，是给定动作a时的收益期望：</p><script type="math/tex; mode=display">q_*(a)\doteq E[R_t | A_t = a]</script><p>动作a在时刻t的价值$Q<em>t(a)$希望接近$q</em>*(a)$。</p><p>讲对应最高估计价值的动作成为贪心(greedy)动作。选择贪心的动作为试探(exploration)，非贪心的动作为开发(exploitation)。</p><h2 id="动作-价值方法"><a href="#动作-价值方法" class="headerlink" title="动作-价值方法"></a>动作-价值方法</h2><p>动作的价值的真实值是选择这个动作的期望收益</p><script type="math/tex; mode=display">Q_t(a)\doteq \frac{\sum_{i = 1}^{t - 1} R_i  \cdot  1_{A_i = a}} {\sum_{i = 1}^{t - 1}1_{A_i = a}}</script><p>t时刻前通过执行动作a得到的收益总和 / 执行次数。大数定理：$Q<em>t(a) -&gt; q</em>*(a)$</p><p>贪心动作选择：</p><script type="math/tex; mode=display">A_t \doteq argmax_a Q_t(a)</script><p>$\epsilon-greedy$ 大部分时间贪心，偶尔独立于动作-价值估计方法从所有动作中等概率做出选择。</p><h2 id="增量式实现"><a href="#增量式实现" class="headerlink" title="增量式实现"></a>增量式实现</h2><p>动作-价值方法把动作价值作为观测到的收益的样本均值来估计。通过增量式实现高效计算均值。某个动作被选择n-1次之后的动作价值为：</p><script type="math/tex; mode=display">Q_n \doteq \frac{R_1 + R2 + ... + R_{n - 1}}{n-1}</script><p><img src="https://ftp.bmp.ovh/imgs/2020/07/2e638d7c1123f4fc.png" srcset="/img/loading.gif" alt=""></p><p>参数更新：新估计值&lt;-旧估计值+步长x[目标-旧估计值]</p><p>处理动作a的第n个收益使用的步长$\frac{1}{n}$，记为$\alpha$。</p><h2 id="非平稳问题"><a href="#非平稳问题" class="headerlink" title="非平稳问题"></a>非平稳问题</h2><p>取平均的方法对于平稳问题适合，但收益的概率随着时间变化而变化，使用固定步长对收益均值$Q_n$增量更新：</p><script type="math/tex; mode=display">Q_{n+1} \doteq Q_n + \alpha [R_n - Q_n]</script><p>推导：</p><p><img src="https://ftp.bmp.ovh/imgs/2020/07/40d5220b2b9dac81.png" srcset="/img/loading.gif" alt="c202"></p><p>$Q_{n + 1}$成为对过去收益和初始的估计$Q_1$的加权平均。权重值以指数形式递减，指数近因加权平均(exponential recency-weighted average)</p><h2 id="乐观-Optimistic-的初始值"><a href="#乐观-Optimistic-的初始值" class="headerlink" title="乐观(Optimistic)的初始值"></a>乐观(Optimistic)的初始值</h2><p>前面的Q值计算方法依赖$Q_1$，对于采样平均法(sample-average)，动作-价值方法,当所有动作至少选择一次则消失。对于a是常数项的情况，偏差随时间逐渐减小，并不会消失。$Q_1$可以作为超参数（先验知识）。$Q_1$过大-&gt;过度乐观的估计，因为无论哪个动作收益都比原来的小，倾向于使用其他动作。</p><h2 id="UCB-置信度上界的动作选择"><a href="#UCB-置信度上界的动作选择" class="headerlink" title="UCB 置信度上界的动作选择"></a>UCB 置信度上界的动作选择</h2><script type="math/tex; mode=display">A_t \doteq argmax_a [Q_t(a) + c\sqrt{\frac{ln t}{N_t(a)}}]</script><p>c &gt; 0, $N_t(a)$表示在t之前动作a被选择的次数。简单平稳问题可以提升性能，复杂非平稳问题不可用（处理大的状态空间）。</p><h2 id="梯度赌博机算法"><a href="#梯度赌博机算法" class="headerlink" title="梯度赌博机算法"></a>梯度赌博机算法</h2><p>引入数值化偏好函数(preference)$H_t$</p><script type="math/tex; mode=display">Pr\{A_{t} = a\} = \frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}} = \pi_t{a}</script><p>$\pi_t(a)$表示动作a在t时刻被选择的概率。</p><script type="math/tex; mode=display">H_{t+1}(a) = H_{t}(a) - \alpha(R_t - \bar{R_t})(1-\pi_t(a))</script><p>$\bar{R_t}$: t时刻内收益的平均值，作为基准收益，如果高于它，选择该动作概率增加。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>强化学习</tag>
+      
+      <tag>第二章</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Ubuntu18.04配置</title>
     <link href="/2020/07/13/Ubuntu18-04%E9%85%8D%E7%BD%AE/"/>
     <url>/2020/07/13/Ubuntu18-04%E9%85%8D%E7%BD%AE/</url>

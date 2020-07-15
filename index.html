@@ -144,6 +144,52 @@
     
     
     <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/07/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Chapter2/">
+        <p class="h4 index-header">强化学习笔记 - Chapter2</p>
+      </a>
+
+      <a href="/2020/07/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Chapter2/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Chapter 2 多臂赌博机k臂赌博机问题k臂赌博机有k个控制杆，需要学会将动作集中到最好的控制杆上。重复在k个选项或动作中做出选择，做出选择后得到一定数值的收益，收益由动作决定的平稳概率分布产生。
+目标：最大化一段时间内的总收益。
+任意动作a对应的价值为$q_*(a) $，是给定动作a时的收益期望：
+
+q_*(a)\doteq E[R_t | A_t = a]动作a在时刻t的价值$Qt(a)$希望接近$q*(a)$。
+讲对应最高估计价值的动作成为贪心(greedy)动作。选择贪心的动作为试探(exploration)，非贪心的动作为开发(exploitation)。
+动作-价值方法动作的价值的真实值是选择这个动作的期望收益
+
+Q_t(a)\doteq \frac{\sum_{i = 1}^{t - 1} R_i  \cdot  1_{A_i = a}} {\sum_{i = 1}^{t - 1}1_{A_i = a}}t时刻前通过执行动作a得到的收益总和 / 执行次数。大数定理：$Qt(a) -&gt; q*(a)$
+贪心动作选择：
+
+A_t \doteq argmax_a Q_t</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-15&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0">强化学习</a>&nbsp;
+          
+            <a href="/tags/%E7%AC%AC%E4%BA%8C%E7%AB%A0">第二章</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2020/07/13/Ubuntu18-04%E9%85%8D%E7%BD%AE/">
         <p class="h4 index-header">Ubuntu18.04配置</p>
       </a>
@@ -642,59 +688,6 @@ ERROR 1698 (28000): Access denied for user &#39;root&#39;@&#39;localhost&#39;
             <a href="/tags/nextcloud">nextcloud</a>&nbsp;
           
             <a href="/tags/%E7%BB%B4%E6%8A%A4">维护</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%893%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/">
-        <p class="h4 index-header">hexo建站教程（初级）3——添加管理界面与评论</p>
-      </a>
-
-      <a href="/2020/02/22/hexo%E5%BB%BA%E7%AB%99%E6%95%99%E7%A8%8B%EF%BC%88%E5%88%9D%E7%BA%A7%EF%BC%893%E2%80%94%E2%80%94%E6%B7%BB%E5%8A%A0%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">添加admin-hexo界面官网 参考文档1 参考文档2
-安装在安装admin-hexo之前需要安装一些依赖，避免错误发生。键入命令：
-npm install minimatch@&quot;3.0.2&quot;  
-npm update -d
-可以完成依赖的安装。之后键入命令npm install --save hexo-admin可以完成插件的安装。执行hexo s命令，在localhost:4000/admin可以查看。
-设置密码设置在Setting界面，点击Setup authentification here，创建用户名和密码，按照提示在blog根目录中的_config.yml中添加该界面下方的设置。
-发布在blog根目录下，新建文件夹，进入后新建脚本d.sh，加入命令hexo clean &amp; hexo g -d，之后通过命令chmod +x d.sh设置权限。最后一步在blog根目录下的_config.yml的admin部分添加：
-admin:
-  username: ...
-  password_hash: ...
-  secret: ...
-  deployC</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-22&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E7%BD%91%E7%BB%9C">网络</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA">网站搭建</a>&nbsp;
-          
-            <a href="/tags/%E5%8D%9A%E5%AE%A2">博客</a>&nbsp;
-          
-            <a href="/tags/hexo">hexo</a>&nbsp;
           
         
       </div>
