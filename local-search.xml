@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Pytorch学习笔记：torch的使用</title>
+    <link href="/2020/07/16/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9Atorch%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/07/16/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9Atorch%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Pytorch学习：Tensor的使用"><a href="#Pytorch学习：Tensor的使用" class="headerlink" title="Pytorch学习：Tensor的使用"></a>Pytorch学习：Tensor的使用</h1><p>Ref: <a href="https://zhuanlan.zhihu.com/p/67184419" target="_blank" rel="noopener">知乎专栏</a> <a href="https://zhuanlan.zhihu.com/p/69294347" target="_blank" rel="noopener">知乎专栏</a></p><h2 id="Requires-grad"><a href="#Requires-grad" class="headerlink" title="Requires_grad"></a>Requires_grad</h2><p>如果对tensor无特殊的指定需求，不需要求导，通过<code>tensor.requires_grad</code>检查张量是否需要求导。如果输入中有需要求导的，则输出需要求导。当所有的输入都不需要求导的时候输出才不需要求导。</p><p>如果设置参数的导数为false，即<code>param.requires_grad = False</code>，可以冻结部分网络，让这些层数不再更新。</p><pre><code class="lang-python">input = torch.randn(8, 3, 50, 100)print(input.requires_grad)# Falsenet = nn.Sequential(nn.Conv2d(3, 16, 3, 1),                    nn.Conv2d(16, 32, 3, 1))for param in net.named_parameters():    param[1].requires_grad = False    print(param[0], param[1].requires_grad)# 0.weight False# 0.bias False# 1.weight False# 1.bias Falseoutput = net(input)print(output.requires_grad)# False</code></pre><h2 id="torch-no-grad"><a href="#torch-no-grad" class="headerlink" title="torch.no_grad()"></a>torch.no_grad()</h2><p>通过<code>with torch.no_grad()</code>达到暂时不追踪网络参数中导数的目的，减少计算和内存消耗。</p><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p><code>x.view(x.size(0), -1)</code> =&gt; reshape</p><p><code>[weight].grad</code>获得导数</p><p><code>tensor.data</code>获得tensor数据</p><p><code>tensor.detach()</code>会自动求导系统追踪，存储空间是共享的。</p><p><code>device</code>减少<code>if</code>语句的使用。</p><pre><code class="lang-python">device = torch.device(&quot;cuda&quot;) if torch.cuda.is_available() else torch.device(&quot;cpu&quot;)a = torch.rand([3,3]).to(device)# 干其他的活b = torch.rand([3,3]).to(device)# 干其他的活c = torch.rand([3,3]).to(device)</code></pre><p>tensor-&gt;numpy = tensor-&gt;detach-&gt;numpy</p><pre><code class="lang-python">x  = torch.rand([3,3], device=&#39;cuda&#39;)x_ = x.cpu().numpy()y  = torch.rand([3,3], requires_grad=True, device=&#39;cuda&#39;).y_ = y.cpu().detach().numpy()# y_ = y.detach().cpu().numpy() 也可以# 二者好像差别不大？我们来比比时间：start_t = time.time()for i in range(10000):    y_ = y.cpu().detach().numpy()print(time.time() - start_t)# 1.1049120426177979start_t = time.time()for i in range(10000):    y_ = y.detach().cpu().numpy()print(time.time() - start_t)# 1.115112543106079# 时间差别不是很大，当然，这个速度差别可能和电脑配置# （比如 GPU 很贵，CPU 却很烂）有关。</code></pre><p>我们在提取 loss 的纯数值的时候，常常会用到 <code>loss.item()</code>，其返回值是一个 Python 数值 (python number)。不像从 tensor 转到 numpy (需要考虑 tensor 是在 cpu，还是 gpu，需不需要求导)，无论什么情况，都直接使用 <code>item()</code> 就完事了。如果需要从 gpu 转到 cpu 的话，PyTorch 会自动帮你处理。</p><p>但注意 <code>item()</code> 只适用于 tensor 只包含一个元素的时候。因为大多数情况下我们的 loss 就只有一个元素，所以就经常会用到 <code>loss.item()</code>。如果想把含多个元素的 tensor 转换成 Python list 的话，要使用 <code>tensor.tolist()</code>。</p><pre><code class="lang-python">x  = torch.randn(1, requires_grad=True, device=&#39;cuda&#39;)print(x)# tensor([-0.4717], device=&#39;cuda:0&#39;, requires_grad=True)y = x.item()print(y, type(y))# -0.4717346727848053 &lt;class &#39;float&#39;&gt;x = torch.randn([2, 2])y = x.tolist()print(y)# [[-1.3069953918457031, -0.2710231840610504], [-1.26217520236969, 0.5559719800949097]</code></pre><h2 id="叶子张量"><a href="#叶子张量" class="headerlink" title="叶子张量"></a>叶子张量</h2><p>使用<code>tensor.is_leaf</code>判断是否是叶子张量，在反向传播中，只有<code>is_leaf = True</code>的时候，需要求导的张量才会被保留下来。张量被用户创建时，设置<code>requires_grad = True</code>，它是一个叶子节点，如果它由其他运算操作产生，它就不是一个叶子节点。<code>tensor.retain_grad()</code>保留中间变量的导数。如果仅需要输出可以使用<code>tensor.register_hook(lambda grad: print(&#39;xx grad:&#39;, grad))</code></p><h2 id="inplace"><a href="#inplace" class="headerlink" title="inplace"></a>inplace</h2><p>不改变变量内存地址的情况下改变值。</p><pre><code class="lang-python"># 我们要用到 id() 这个函数，其返回值是对象的内存地址# 情景 1a = torch.tensor([3.0, 1.0])print(id(a)) # 2112716404344a = a.exp()print(id(a)) # 2112715008904# 在这个过程中 a.exp() 生成了一个新的对象，然后再让 a# 指向它的地址，所以这不是个 inplace 操作# 情景 2a = torch.tensor([3.0, 1.0])print(id(a)) # 2112716403840a[0] = 10print(id(a), a) # 2112716403840 tensor([10.,  1.])# inplace 操作，内存地址没变</code></pre><p>pytorch通过<code>tensor._version</code>检测是否发生了inplace。</p><h2 id="修改叶子节点"><a href="#修改叶子节点" class="headerlink" title="修改叶子节点"></a>修改叶子节点</h2><pre><code class="lang-python"># 方法一a = torch.tensor([10., 5., 2., 3.], requires_grad=True)print(a, a.is_leaf, id(a))# tensor([10.,  5.,  2.,  3.], requires_grad=True) True 2501274822696a.data.fill_(10.)# 或者 a.detach().fill_(10.)print(a, a.is_leaf, id(a))# tensor([10., 10., 10., 10.], requires_grad=True) True 2501274822696loss = (a*a).mean()loss.backward()print(a.grad)# tensor([5., 5., 5., 5.])# 方法二a = torch.tensor([10., 5., 2., 3.], requires_grad=True)print(a, a.is_leaf)# tensor([10.,  5.,  2.,  3.], requires_grad=True) Truewith torch.no_grad():    a[:] = 10.print(a, a.is_leaf)# tensor([10., 10., 10., 10.], requires_grad=True) Trueloss = (a*a).mean()loss.backward()print(a.grad)# tensor([5., 5., 5., 5.])</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>PyTorch学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>PyTorch</tag>
+      
+      <tag>torch使用</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>强化学习笔记 - Chapter2</title>
     <link href="/2020/07/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Chapter2/"/>
     <url>/2020/07/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-Chapter2/</url>
