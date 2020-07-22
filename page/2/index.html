@@ -144,6 +144,109 @@
     
     
     <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/03/03/nextcloud%E4%BC%98%E5%8C%96/">
+        <p class="h4 index-header">nextcloud优化</p>
+      </a>
+
+      <a href="/2020/03/03/nextcloud%E4%BC%98%E5%8C%96/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">由于nextcloud提示了一些优化信息，这里进行优化。
+内存限制之前限制php-fpm的内存大小为512MB，需要进行更改，在*php-fpm文件夹*/pool.d/www.conf中设置php_admin_value[memory_limit] = 2048M即可。
+getenv(“PATH”)为空在前面提到的配置文件中将下面部分取消注释：
+env[HOSTNAME] = $HOSTNAME
+env[PATH] = /usr/local/bin:/usr/bin:/bin
+env[TMP] = /tmp
+env[TMPDIR] = /tmp
+env[TEMP] = /tmp
+安全性
+HTTP 请求头 “X-Frame-Options” 没有配置为 “SAMEORIGIN”在nginx的配置文件中
+
+HTTP的请求头 “Strict-Transport-Security” 未设置为至少 “15552000” 秒
+
+HTTP 头 “Referrer-Policy” 未设置成 “no-referrer”，”no-referrer-when-downgrade”，”strict-origi</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-03&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/">
+        <p class="h4 index-header">vsftpd使用</p>
+      </a>
+
+      <a href="/2020/02/24/vsftpd%E4%BD%BF%E7%94%A8/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">vsftpd的使用参考文档
+安装键入命令：sudo apt-get install vsfptd
+为了能够正常使用ftp_TLS，需要在/etc/vsftpd.conf中添加：
+# 开启 ssl 并指定使用的协议
+ssl_enable=YES
+ssl_tlsv1=YES
+ssl_sslv2=NO
+ssl_sslv3=NO
+# 指定证书和 key 文件
+rsa_cert_file=/*自己的目录*/*证书*.crt
+rsa_private_key_file=/*自己的目录*/*证书*.key
+# 安全选项
+allow_anon_ssl=NO
+force_local_data_ssl=YES
+force_local_logins_ssl=YES
+require_ssl_reuse=NO
+ssl_ciphers=HIGH
+# 指定主动模式时使用的端口范围
+pasv_min_port=*自己设置端口*
+pasv_max_port=*自己设置端口*
+重启vsftpd服务即可。
+设置账户参考文档
+需要添加账户，并指定主目录：sudo useradd -d /*自己设置目录*/ -s /usr/sb</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-24&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%BD%91%E7%BB%9C">网络</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E7%BD%91%E7%BB%9C">网络</a>&nbsp;
+          
+            <a href="/tags/ftp">ftp</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2020/02/24/%E9%85%8D%E7%BD%AEnextcloud%E7%A7%81%E6%9C%89%E4%BA%91%E7%9B%98%E6%9C%8D%E5%8A%A1/">
         <p class="h4 index-header">配置nextcloud私有云盘服务</p>
       </a>

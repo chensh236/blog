@@ -4,6 +4,64 @@
   
   
   <entry>
+    <title>BOS设计器/套打设计器</title>
+    <link href="/2020/07/22/BOS%E8%AE%BE%E8%AE%A1%E5%99%A8-%E5%A5%97%E6%89%93%E8%AE%BE%E8%AE%A1%E5%99%A8/"/>
+    <url>/2020/07/22/BOS%E8%AE%BE%E8%AE%A1%E5%99%A8-%E5%A5%97%E6%89%93%E8%AE%BE%E8%AE%A1%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<p><a href="http://club.kisdee.com" target="_blank" rel="noopener">论坛</a> <a href="http://open.kingdee.com/K3cloud/SDK/webframe.html" target="_blank" rel="noopener">SDK</a> <a href="http://open.kingdee.com/K3cloud/WenKu/Index.aspx" target="_blank" rel="noopener">文档中心</a></p><p>简单账表-&gt;(树形账表、分页账表)</p><h1 id="插件学习"><a href="#插件学习" class="headerlink" title="插件学习"></a>插件学习</h1><h3 id="数据库命名规范"><a href="#数据库命名规范" class="headerlink" title="数据库命名规范"></a>数据库命名规范</h3><p>表格名&lt;30字符，{ISV标识}_T_{子系统}_{表名}</p><h3 id="报表属性"><a href="#报表属性" class="headerlink" title="报表属性"></a>报表属性</h3><h4 id="ReportProperty属性"><a href="#ReportProperty属性" class="headerlink" title="ReportProperty属性"></a>ReportProperty属性</h4><ul><li><p>IdentityFieldName</p><p>分页顺序字段名，实模式取数必须设置，插件可以修改</p></li><li><p>GroupSummaryInfoData</p><p>分组信息数据（包含默认分组字段、分组级次字段等信息）</p></li><li><p>IsDefaultOnlyDspSumAndDetailData</p><p>默认只显示合计和明细数据，不显示小计数据</p></li><li><p>IsGroupSummary</p><p>标识报表是否支持分组汇总</p></li><li><p>IsUIDesignerColumns</p><p>标识报表的列必须通过UI设计，不考虑动态列</p></li><li><p>SimpleAllCols</p><p>是否锁定表格列</p></li><li><p>VirtualMode</p><p>是否虚模式取数</p></li><li><p>ReportName</p><p>报表名称</p></li><li><p>DetailReportId</p><p>明细报表的FormId(报表表单标识)，用于单明细报表</p></li><li><p>DetailReportFormIdFieldName</p><p>明细报表的FormId存储字段名，用于多明细报表</p></li><li><p>DetailReportType</p><p>明细报表类型</p></li><li><p>BillKeyFieldName</p><p>联联单据主键字段名</p></li><li><p>BillTypeFieldName</p><p>联查单据对应的单据类型名称</p></li><li><p>FormIdFieldName</p><p>联联单据FormId字段名</p></li><li><p>DecimalControlFieldList</p><p>精度控制字段集合</p></li></ul><h4 id="IRptParams参数的属性和方法"><a href="#IRptParams参数的属性和方法" class="headerlink" title="IRptParams参数的属性和方法"></a>IRptParams参数的属性和方法</h4><ul><li><p>CurrentPosition</p><p>报表当前位置,除分页报表外，该值始终是0</p></li><li><p>StartRow</p><p>报表取数开始行号</p></li><li><p>EndRow</p><p>报表取数结束行号</p></li><li><p>IsRefresh</p><p>报表是否重新刷新取数</p></li><li><p>IsOnlyQuerySumData</p><p>只查询汇总数据</p></li><li><p>FilterParameter</p><p>过滤条件</p></li><li><p>ParameterData</p><p>用户参数</p></li><li><p>CustomParams</p><p>报表其他参数，可以任意添加（如发布报表定义的参数）</p></li><li><p>FilterFieldInfo</p><p>过滤字段元数据信息</p></li><li><p>GetParentReportFilter()</p><p>获得父报表过滤条件</p></li><li><p>GetParentReportCurrentRow()</p><p>获得父报表当前行数据</p></li><li><p>GetFirstParentReportFilter() </p><p>报表穿透，获得第一个报表的过滤条件</p></li><li><p>GetParentReportCurrentConditionData()</p><p>获得父报表是分页报表的当前分页条件</p></li></ul><h3 id="需要引用的组件"><a href="#需要引用的组件" class="headerlink" title="需要引用的组件"></a>需要引用的组件</h3><pre><code>Kingdee.BOSKingdee.BOS.AppKingdee.BOS.ContractsKingdee.BOS.CoreKingdee.BOS.DataEntity</code></pre><h2 id="动态表单插件"><a href="#动态表单插件" class="headerlink" title="动态表单插件"></a>动态表单插件</h2><h3 id="继承体系"><a href="#继承体系" class="headerlink" title="继承体系"></a>继承体系</h3><p>插件基类在<code>Kingdee.BOS.Core.dll</code>中。</p><div class="table-container"><table><thead><tr><th>领域类型</th><th>基类</th><th>命名参考</th></tr></thead><tbody><tr><td>动态表单  –  维护</td><td>AbstractDynamicFormPlugIn</td><td>ExpressionEdit</td></tr><tr><td>业务单据  –  维护</td><td>AbstractBillPlugIn</td><td>PurchaseOrderEdit</td></tr><tr><td>业务单据 – 列表</td><td>AbstractListPlugIn</td><td>PurchaseOrderList</td></tr><tr><td>基础资料  –  维护</td><td>AbstractBasePlugIn</td><td>MaterialEdit</td></tr><tr><td>基础资料  –  列表</td><td>AbstractListPlugIn</td><td>MaterialList</td></tr></tbody></table></div><div class="table-container"><table><thead><tr><th>业务模型</th><th>类（插件）</th><th>继承自抽象类</th></tr></thead><tbody><tr><td>表单插件</td><td>单据插件</td><td>Kingdee.BOS.Core. Bill.PlugIn.AbstractBillPlugIn</td></tr><tr><td></td><td>基础资料插件</td><td>Kingdee.BOS.Core.  Base.PlugIn.AbstractBasePlugIn</td></tr><tr><td></td><td>动态表单插件</td><td>Kingdee.BOS.Core.  DynamicForm.PlugIn.AbstractDynamicFormPlugIn</td></tr><tr><td>列表插件</td><td>列表插件</td><td>Kingdee.BOS.Core.  List.PlugIn.AbstractListPlugIn</td></tr></tbody></table></div><h4 id="动态表单插件-1"><a href="#动态表单插件-1" class="headerlink" title="动态表单插件"></a>动态表单插件</h4><p>命名空间<code>Kingdee.BOS.Core.DynamicForm.PlugIn</code>。抽象类<code>AbstractDynamicFormPlugIn</code></p><ul><li>接口<ul><li>IDynamicFormViewPlugIn</li><li>IDynamicFormModelPlugIn</li></ul></li><li>加载机制<ul><li>OnInitialize</li><li>CreateNewData / AfterCreateNewData</li><li>BeforeBindData / AfterBindData</li><li>BeforeClosed</li></ul></li><li>表单操作<ul><li>BeforeDoOperation / AfterDoOperation</li><li>BeforeF7Select / AfterF7Select</li><li>TabItemSelectedChange</li></ul></li><li>表单事件<ul><li>BarItemClick</li><li>EntryBarItemClick</li><li>ToolBarItemClick</li><li>ButtonClick</li><li>EntityRowClick</li><li>EntityRowDoubleClick</li><li>EntryButtonCellClick</li></ul></li><li>模型访问操作<ul><li>BeforeUpdateValue</li><li>BeforeDeleteRow</li><li>AfterDeleteRow</li></ul></li></ul><h4 id="单据插件（继承动态表单）"><a href="#单据插件（继承动态表单）" class="headerlink" title="单据插件（继承动态表单）"></a>单据插件（继承动态表单）</h4><ul><li>接口<ul><li>IBillViewPlugIn<ul><li>OnBillInitialize</li><li>参数BillOpenParameter</li></ul></li><li>IBillModelPlugIn<ul><li>BeforeSave / AfterSave</li><li>BeforeSubmit / AfterSubmit</li></ul></li></ul></li></ul><h4 id="列表插件（继承动态表单）"><a href="#列表插件（继承动态表单）" class="headerlink" title="列表插件（继承动态表单）"></a>列表插件（继承动态表单）</h4><ul><li>接口<ul><li>IListViewPlugIn<ul><li>OnListInitialize</li><li>参数ListOpenParameter</li></ul></li><li>AfterGetData</li><li>FormatCellValue</li><li>IListModelPlugIn<ul><li>PrepareFilterParameter</li><li>BatchCopyData</li></ul></li><li>IListFilterView</li><li>IListFilterModel</li></ul></li></ul><h4 id="过滤条件插件"><a href="#过滤条件插件" class="headerlink" title="过滤条件插件"></a>过滤条件插件</h4><ul><li>接口<ul><li>IListFilterView</li><li>IListFilterModel</li></ul></li><li><p>IListFilterModel</p><ul><li>FilterObject</li><li>QuickFilterObject</li><li>IsolationOrgId</li><li>GetFilterField</li></ul></li><li><p>事件</p><ul><li>OnParseSetting</li><li>FireBeforeBindFilterMetadata</li><li>FireBeforeSelectTreeNodeScheme</li></ul></li></ul><h3 id="插件开发步骤"><a href="#插件开发步骤" class="headerlink" title="插件开发步骤"></a>插件开发步骤</h3><ul><li><p>定义插件类（参照继承体系）；</p></li><li><p>分析业务定义重载方法；</p></li><li><p>引用相关组件（参照组件引用规则）；</p></li><li><p>重载方法编码；</p></li><li><p>设置编译路径，编译组件；</p></li><li><p>打开IDE设计器，配置插件；</p></li></ul><h2 id="插件模型"><a href="#插件模型" class="headerlink" title="插件模型"></a>插件模型</h2><h3 id="架构模型"><a href="#架构模型" class="headerlink" title="架构模型"></a>架构模型</h3><p><img src="/.com//构架图.png" srcset="/img/loading.gif" alt="构架图"></p><h3 id="领域模型"><a href="#领域模型" class="headerlink" title="领域模型"></a>领域模型</h3><p><img src="/.com//模型图.png" srcset="/img/loading.gif" alt="模型图"></p><h3 id="动态表单视图"><a href="#动态表单视图" class="headerlink" title="动态表单视图"></a>动态表单视图</h3><ul><li>管理界面控件外观及样式<ul><li>表单外观</li><li>控件外观</li><li>字段外观</li></ul></li><li>接口<ul><li>IDynamicFormView</li><li>IDynamicFormViewService</li></ul></li><li>2个重要的属性<ul><li>BusinessInfo</li><li>LayoutInfo</li></ul></li><li>界面元素访问<ul><li>访问菜单<ul><li>this.View.GetMainBarItem</li><li>this.View.GetBarItem</li></ul></li><li>访问字段<ul><li>this.View.GetFieldEditor</li><li>this.View.LockField</li><li>this.View.SetFormTitle</li></ul></li></ul></li><li>执行操作<ul><li>ShowForm</li><li>UpdateView</li><li>InvokeFieldUpdateService</li></ul></li></ul><h3 id="动态表单模型"><a href="#动态表单模型" class="headerlink" title="动态表单模型"></a>动态表单模型</h3><ul><li>管理业务逻辑与业务规则<ul><li>表单操作</li><li>表单服务</li><li>业务规则</li><li>校验器</li></ul></li><li>接口<ul><li>IDynamicFormView</li><li>IDynamicFormModelService</li></ul></li><li>2个重要的属性<ul><li>BusinessInfo</li><li>DataObject</li></ul></li><li>数据操作<ul><li>CreateNewData</li><li>CreateNewEntryRow</li><li>InsertEntryRow</li><li>GetEntryCurrentRowIndex</li><li>LoadReferenceData</li><li>GetValue</li><li>GetEntityDataObject</li></ul></li></ul><h2 id="服务插件"><a href="#服务插件" class="headerlink" title="服务插件"></a>服务插件</h2><p>命名空间：<code>Kingdee.BOS.Core.DynamicForm.PlugIn</code></p><p>抽象类：<code>AbstractOperationServicePlugIn</code></p><h3 id="继承体系-1"><a href="#继承体系-1" class="headerlink" title="继承体系"></a>继承体系</h3><div class="table-container"><table><thead><tr><th><strong>业务模型</strong></th><th><strong>继承自抽象类</strong></th></tr></thead><tbody><tr><td><strong>服务插件</strong></td><td>Kingdee.BOS.Core.DynamicForm.PlugIn.AbstractOperationServicePlugIn</td></tr></tbody></table></div><ul><li>接口<ul><li>IOperationServicePlugIn<ul><li>BeforeExecuteOperationTransaction</li><li>AfterExecuteOperationTransaction</li><li>BeginOperationTransaction</li><li>EndOperationTransaction</li></ul></li></ul></li><li>校验服务<ul><li>IOperationServicePlugIn<ul><li>OnAddValidators</li></ul></li><li>SaveValidator : AbstractValidator<ul><li>Validate</li></ul></li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>金蝶云</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ERP</tag>
+      
+      <tag>金蝶云星空</tag>
+      
+      <tag>BOS设计器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>金蝶云K3 Cloud安装</title>
+    <link href="/2020/07/22/%E9%87%91%E8%9D%B6%E4%BA%91K3-Cloud%E5%AE%89%E8%A3%85/"/>
+    <url>/2020/07/22/%E9%87%91%E8%9D%B6%E4%BA%91K3-Cloud%E5%AE%89%E8%A3%85/</url>
+    
+    <content type="html"><![CDATA[<h2 id="k3Cloud本体安装"><a href="#k3Cloud本体安装" class="headerlink" title="k3Cloud本体安装"></a>k3Cloud本体安装</h2><p>根据金蝶云安装指南进行安装。在安装时Windows10 除了MSDTC没有打开，其余已经打开，这里记录MSDTC在<code>Windows 10 Pro</code>下的打开过程。</p><p>Win + R打开运行，输入dcomcnfg打开组件服务窗口。之后在组件服务-&gt;计算机-&gt;我的电脑-&gt;Distributed Transaction Coordinators-&gt;本地DTC。打开属性，进入安全Tab，打开网络DTC访问，允许本地、远程、出站、入站。</p><h2 id="SQL-Server服务"><a href="#SQL-Server服务" class="headerlink" title="SQL Server服务"></a>SQL Server服务</h2><p><a href="https://go.microsoft.com/fwlink/?linkid=866662" target="_blank" rel="noopener">SQL Server Developer</a>是SQL Server的全功能免费版本，适用于非生产环境。另外，需要安装<code>SQL Server Management Studio(SSMS)</code>便于对<code>SQL Server</code>进行管理。<a href="https://aka.ms/ssmsfullsetup" target="_blank" rel="noopener">SSMS下载地址</a></p><p>创建数据库，默认的管理员账户为<code>sa</code>，登录身份认证使用<code>SQL Server</code>身份认证。让金蝶云能正常连接数据库的正常使用，需要创建非管理员账户，这里设定为<code>kingdee</code>。再对象资源管理器-&gt;安全性-&gt;登录名中添加，并添加用户名的角色。</p><h2 id="金蝶云星空管理中心"><a href="#金蝶云星空管理中心" class="headerlink" title="金蝶云星空管理中心"></a>金蝶云星空管理中心</h2><p>默认用户名<code>Administrator</code>，密码<code>888888</code>。需要创建数据中心，创建时需要键入SQL Server的管理员以及数据库用户的用户名密码。同时创建日志中心。等待数据中心创建后可以通过Web或者Client端登陆金蝶云星空。这里的地址为<a href="http://desktop-cudfdln/K3Cloud" target="_blank" rel="noopener">Web地址</a>。注意：多次出现语言未加载/获取语言失败的情况。登录管理中心后对数据中心进行语言设置即可解决。电脑重启后可能就会出现。</p><p>占用内存过大问题？</p><h2 id="BOS设计器安装"><a href="#BOS设计器安装" class="headerlink" title="BOS设计器安装"></a>BOS设计器安装</h2><p>在Web端的下载中心即可下载Client端以及BOS设计器、BOS套打设计器。设计器通过在线账户登录。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>金蝶云</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ERP</tag>
+      
+      <tag>金蝶云星空</tag>
+      
+      <tag>配置</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Pytorch学习笔记：torch的使用</title>
     <link href="/2020/07/16/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9Atorch%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <url>/2020/07/16/Pytorch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9Atorch%E7%9A%84%E4%BD%BF%E7%94%A8/</url>

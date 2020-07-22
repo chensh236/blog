@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="Sihang Chen">
   <meta name="keywords" content="">
-  <title>分类 ~ chensh236&#39;s blog</title>
+  <title>金蝶云K3 Cloud安装 ~ chensh236&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -106,7 +106,7 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="view intro-2" id="background" false
          style="background: url('/img/default.png')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
@@ -116,6 +116,35 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期三, 七月 22日 2020, 9:15 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    450 字
+                  </span>&nbsp;
+                
+
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -127,22 +156,109 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="k3Cloud本体安装"><a href="#k3Cloud本体安装" class="headerlink" title="k3Cloud本体安装"></a>k3Cloud本体安装</h2><p>根据金蝶云安装指南进行安装。在安装时Windows10 除了MSDTC没有打开，其余已经打开，这里记录MSDTC在<code>Windows 10 Pro</code>下的打开过程。</p>
+<p>Win + R打开运行，输入dcomcnfg打开组件服务窗口。之后在组件服务-&gt;计算机-&gt;我的电脑-&gt;Distributed Transaction Coordinators-&gt;本地DTC。打开属性，进入安全Tab，打开网络DTC访问，允许本地、远程、出站、入站。</p>
+<h2 id="SQL-Server服务"><a href="#SQL-Server服务" class="headerlink" title="SQL Server服务"></a>SQL Server服务</h2><p><a href="https://go.microsoft.com/fwlink/?linkid=866662" target="_blank" rel="noopener">SQL Server Developer</a>是SQL Server的全功能免费版本，适用于非生产环境。另外，需要安装<code>SQL Server Management Studio(SSMS)</code>便于对<code>SQL Server</code>进行管理。<a href="https://aka.ms/ssmsfullsetup" target="_blank" rel="noopener">SSMS下载地址</a></p>
+<p>创建数据库，默认的管理员账户为<code>sa</code>，登录身份认证使用<code>SQL Server</code>身份认证。让金蝶云能正常连接数据库的正常使用，需要创建非管理员账户，这里设定为<code>kingdee</code>。再对象资源管理器-&gt;安全性-&gt;登录名中添加，并添加用户名的角色。</p>
+<h2 id="金蝶云星空管理中心"><a href="#金蝶云星空管理中心" class="headerlink" title="金蝶云星空管理中心"></a>金蝶云星空管理中心</h2><p>默认用户名<code>Administrator</code>，密码<code>888888</code>。需要创建数据中心，创建时需要键入SQL Server的管理员以及数据库用户的用户名密码。同时创建日志中心。等待数据中心创建后可以通过Web或者Client端登陆金蝶云星空。这里的地址为<a href="http://desktop-cudfdln/K3Cloud" target="_blank" rel="noopener">Web地址</a>。注意：多次出现语言未加载/获取语言失败的情况。登录管理中心后对数据中心进行语言设置即可解决。电脑重启后可能就会出现。</p>
+<p>占用内存过大问题？</p>
+<h2 id="BOS设计器安装"><a href="#BOS设计器安装" class="headerlink" title="BOS设计器安装"></a>BOS设计器安装</h2><p>在Web端的下载中心即可下载Client端以及BOS设计器、BOS套打设计器。设计器通过在线账户登录。</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
                 
-
-<ul class="category-tree-list"><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/PyTorch%E5%AD%A6%E4%B9%A0/">PyTorch学习</a><span class="category-tree-list-count">1</span></li><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/Ubuntu/">Ubuntu</a><span class="category-tree-list-count">3</span><ul class="category-tree-list-child"><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/Ubuntu/GitLab/">GitLab</a><span class="category-tree-list-count">1</span></li></ul></li><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/Vue%E5%AE%9E%E6%88%981/">Vue实战1</a><span class="category-tree-list-count">3</span></li><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a><span class="category-tree-list-count">5</span></li><li class="category-tree-list-item"><a class="category-tree-list-link" href="/categories/%E9%87%91%E8%9D%B6%E4%BA%91/">金蝶云</a><span class="category-tree-list-count">2</span></li></ul>
-
-
-              </div>
-            </div>
+                  <a class="hover-with-bg" href="/categories/%E9%87%91%E8%9D%B6%E4%BA%91">金蝶云</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/ERP">ERP</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E9%87%91%E8%9D%B6%E4%BA%91%E6%98%9F%E7%A9%BA">金蝶云星空</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E9%85%8D%E7%BD%AE">配置</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+  <div id="vcomments" style="width: 90%; margin: 0 auto;"></div>
+  <script defer src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script defer src="//unpkg.com/valine/dist/Valine.min.js"></script> -->
+  <script defer src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  <script>
+    var notify = 'true' === true;
+    var verify = 'true' === true;
+    var oldLoad = window.onload;
+    window.onload = function () {
+      new Valine({
+        el: '#vcomments',
+        notify: notify,
+        verify: verify,
+        app_id: "EYHnNU5l8DJFKKj7Rv00oosF-gzGzoHsz",
+        app_key: "QY4QyvkXK70rGsTJBo1DVIYF",
+        placeholder: "说点什么啦～",
+        avatar: "retro",
+        meta: ['nick', 'mail', 'link'],
+        pageSize: "10",
+      });
+      oldLoad && oldLoad();
+    };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -226,6 +342,11 @@
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -277,7 +398,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "分类&nbsp;",
+        "金蝶云K3 Cloud安装&nbsp;",
       ],
       cursorChar: "|",
       typeSpeed: 70,
