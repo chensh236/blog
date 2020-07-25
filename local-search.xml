@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>实验室回测系统部署学习</title>
+    <link href="/2020/07/25/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2020/07/25/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>2020-07-19</p><p>2020-07-24</p><h3 id="安装Docker，17-03-x-ce"><a href="#安装Docker，17-03-x-ce" class="headerlink" title="安装Docker，17.03.x-ce"></a>安装Docker，17.03.x-ce</h3><pre><code>$ apt-get update$ curl https://releases.rancher.com/install-docker/17.03.sh | sh</code></pre><p>将用户添加到<code>docker group</code>中：<code>sudo usermod -aG docker [your-user]</code></p><h3 id="安装Rancher1-6容器"><a href="#安装Rancher1-6容器" class="headerlink" title="安装Rancher1.6容器"></a>安装Rancher1.6容器</h3><p>Rancher是一个docker容器管理平台实现对Docker和Kubernetes的轻松部署。</p><pre><code>$ sudo docker run -d --restart=unless-stopped -p 8080:8080 --name rancher-server rancher/server</code></pre><h3 id="管理Rancher"><a href="#管理Rancher" class="headerlink" title="管理Rancher"></a>管理Rancher</h3><p>在ADMIN=&gt;Access Control中设置登录认证，这里使用local。</p><h3 id="添加host"><a href="#添加host" class="headerlink" title="添加host"></a>添加host</h3><p>在INFRASTRUCTURE=&gt;Hosts中点击Add host，使用默认配置并添加Host。如果Host没有正常添加，可以考虑以下处理方法：</p><ol><li>放通500、4500端口。</li><li>删除文件：<code>rm -rf /var/lib/rancher/state</code></li><li>删除agent容器：<code>docker ps</code>并查找带有agent的容器id，并使用<code>docker kill xxx</code>命令。并使用<code>docker rm -fv rancher-agent</code>命令</li><li>修改文件<code>vim /etc/docker/daemon.json</code>，在其中添加DNS地址。实验室机房DNS地址为：10.8.8.8以及10.8.4.4。</li></ol><pre><code>{        &quot;dns&quot; : [                &quot;114.114.114.114&quot;,                &quot;8.8.8.8&quot;        ],        &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;], #镜像加速地址}</code></pre><h4 id="启动本地注册表"><a href="#启动本地注册表" class="headerlink" title="启动本地注册表"></a>启动本地注册表</h4><p><code>docker run -d -p 5000:5000 --restart=always --name registry registry:2</code></p><h1 id="Strategy-Service"><a href="#Strategy-Service" class="headerlink" title="Strategy Service"></a>Strategy Service</h1><h2 id="虚拟环境安装"><a href="#虚拟环境安装" class="headerlink" title="虚拟环境安装"></a>虚拟环境安装</h2><pre><code>$ pip3 install virtualenv$ pip3 install virtualenvwrapper</code></pre><p>安装环境后如果提示找不到<code>mkvirtualenv</code>命令，需要在配置。</p><pre><code># 1、在~（家目录）下创建目录用来存放虚拟环境mkdir .virtualenvs# 2、打开~/.bashrc文件，并添加如下：export WORKON_HOME=$HOME/.virtualenvssource /usr/local/bin/virtualenvwrapper.sh# 3、运行source ~/.bashrc</code></pre><p>如果出现<code>ERROR: virtualenvwrapper could not find virtualenv in your path</code>，更改~/.bashrc配置如下：</p><pre><code>export WORKON_HOME=~/.virtualenvsexport VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3# 指定virtualenv的路径export VIRTUALENVWRAPPER_VIRTUALENV=~/.local/bin/virtualenvsource /usr/local/bin/virtualenvwrapper.sh</code></pre><p>使用<code>mkvirtualenv -p python3 [name]</code>命令创建虚拟环境。</p><p>查看所有虚拟环境的命令：<code>workon</code>。使用虚拟环境：<code>workon [name]</code>。推出虚拟环境：<code>deactive</code>。删除虚拟环境：<code>rmvirtualenv [name]</code>。</p><p>在<code>strategy-service</code>目录下，通过<code>pip3 install -r requirement.txt</code>安装依赖。</p><h2 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h2><p>安装<code>thrift</code>以及<code>hiredis</code>。<a href="https://mirrors.cnnic.cn/apache/thrift/0.13.0/" target="_blank" rel="noopener">thrift</a> <a href="https://github.com/redis/hiredis" target="_blank" rel="noopener">redis</a></p><p>安装<code>thrift</code></p><pre><code>$ ./config$ make$ make install$ thrift -version</code></pre><p>安装<code>hiredis</code></p><pre><code>$ make$ make install$ ldconfig /usr/local/lib</code></pre><p>安装<code>libevent</code>。<a href="https://github.com/libevent/libevent" target="_blank" rel="noopener">libevent</a></p><pre><code>$ ./configure --prefix=/usr/local/libevent$ make$ make install</code></pre><h2 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h2><p>在<code>strategy-service</code>文件夹中，执行：<code>python3 main.py run -f ./examples/01-single_avg.py</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>实验室</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>实验室</tag>
+      
+      <tag>回测系统</tag>
+      
+      <tag>部署</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>BOS设计器/套打设计器</title>
     <link href="/2020/07/22/BOS%E8%AE%BE%E8%AE%A1%E5%99%A8-%E5%A5%97%E6%89%93%E8%AE%BE%E8%AE%A1%E5%99%A8/"/>
     <url>/2020/07/22/BOS%E8%AE%BE%E8%AE%A1%E5%99%A8-%E5%A5%97%E6%89%93%E8%AE%BE%E8%AE%A1%E5%99%A8/</url>

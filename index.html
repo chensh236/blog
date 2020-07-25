@@ -144,6 +144,59 @@
     
     
     <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/07/25/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E5%AD%A6%E4%B9%A0/">
+        <p class="h4 index-header">实验室回测系统部署学习</p>
+      </a>
+
+      <a href="/2020/07/25/%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E5%AD%A6%E4%B9%A0/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">部署2020-07-19
+2020-07-24
+安装Docker，17.03.x-ce$ apt-get update
+$ curl https://releases.rancher.com/install-docker/17.03.sh | sh
+将用户添加到docker group中：sudo usermod -aG docker [your-user]
+安装Rancher1.6容器Rancher是一个docker容器管理平台实现对Docker和Kubernetes的轻松部署。
+$ sudo docker run -d --restart=unless-stopped -p 8080:8080 --name rancher-server rancher/server
+管理Rancher在ADMIN=&gt;Access Control中设置登录认证，这里使用local。
+添加host在INFRASTRUCTURE=&gt;Hosts中点击Add host，使用默认配置并添加Host。如果Host没有正常添加，可以考虑以下处理方法：
+
+放通500、4500端口。
+删除文件：rm -r</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-07-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AE%9E%E9%AA%8C%E5%AE%A4">实验室</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4">实验室</a>&nbsp;
+          
+            <a href="/tags/%E5%9B%9E%E6%B5%8B%E7%B3%BB%E7%BB%9F">回测系统</a>&nbsp;
+          
+            <a href="/tags/%E9%83%A8%E7%BD%B2">部署</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2020/07/22/BOS%E8%AE%BE%E8%AE%A1%E5%99%A8-%E5%A5%97%E6%89%93%E8%AE%BE%E8%AE%A1%E5%99%A8/">
         <p class="h4 index-header">BOS设计器/套打设计器</p>
       </a>
@@ -615,98 +668,6 @@ import Router from &#39;vue-route</div>
           <i class="iconfont icon-tag"></i>
           
             <a href="/tags/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/26/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E2-Storage/">
-        <p class="h4 index-header">Vue实战课 小米商城2 Storage</p>
-      </a>
-
-      <a href="/2020/04/26/Vue%E5%AE%9E%E6%88%98%E8%AF%BE-%E5%B0%8F%E7%B1%B3%E5%95%86%E5%9F%8E2-Storage/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Storage与cookie的差别：
-
-
-
-
-类别
-Cookie
-Storage
-
-
-
-
-大小
-4KB
-5MB
-
-
-有效期
-存在有效期
-local storage永久存储, session storage浏览器打开期间有效
-
-
-是否发送到服务端
-是
-否
-
-
-路径限制
-存在
-存储于域名下
-
-
-是否有特定API
-有
-无
-
-
-
-
-使用window.sessionStorage对session storage进行管理。
-/**
- * @abstract: Storage封装
- */
-const STORAGE_KEY = &#39;mall&#39;
-
-export default{
-    // 存储值
-    setItem(key, value, module_name){
-        if(module_name){
-            let val = this.getItem(module_name)
-            this.setItem(module_name, val)
-        } else{
-            let val = this.</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-26&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Vue%E5%AE%9E%E6%88%981">Vue实战1</a>&nbsp;
-          
-            <a href="/tags/Storage">Storage</a>&nbsp;
           
         
       </div>
